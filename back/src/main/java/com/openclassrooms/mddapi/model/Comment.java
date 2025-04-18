@@ -1,6 +1,5 @@
 package com.openclassrooms.mddapi.model;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -12,35 +11,30 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "themes")
-public class Theme {
+@Table(name = "comments")
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotBlank(message = "Title cannot be empty")
-    @NotNull(message = "Title cannot be null")
-    @Column(nullable = false)
-    private String title;
 
     @NotBlank(message = "Description cannot be empty")
     @NotNull(message = "Description cannot be null")
     @Column(nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "theme", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Article> articles = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User author;
 
-    @ManyToMany(mappedBy = "subscribedThemes")
-    private List<User> subscribers = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "article_id")
+    private Article article;
 
     @Column(name= "created_at", nullable = false)
     @JsonProperty("created_at")
@@ -51,16 +45,4 @@ public class Theme {
     @JsonProperty("updated_at")
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     private LocalDateTime updatedAt;
-
-    // Helpers to maintain bidirectional consistency.
-
-    public void addArticle(Article article) {
-        articles.add(article);
-        article.setTheme(this);
-    }
-
-    public void removeArticle(Article article) {
-        articles.remove(article);
-        article.setTheme(null);
-    }
 }

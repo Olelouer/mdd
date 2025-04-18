@@ -1,5 +1,7 @@
 package com.openclassrooms.mddapi.model;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,61 +31,62 @@ import lombok.NoArgsConstructor;
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 @Schema(description = "Entity representing a registered user in the system")
 public class User implements UserDetails {
-
-    /**
-     * Unique identifier for the user.
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Schema(description = "Unique identifier of the user", example = "1")
     private Long id;
 
-    /**
-     * User's name.
-     */
-    @Schema(description = "Full name of the user", example = "John Doe")
+    @Column(unique = true)
+    @NotNull(message = "Name is required")
+    @NotBlank(message = "Name cannot be empty")
     private String name;
 
-    /**
-     * User's email (must be unique).
-     */
     @Column(unique = true)
-    @Schema(description = "User's unique email address", example = "john.doe@example.com")
+    @NotNull(message = "Email is required")
+    @NotBlank(message = "Email cannot be empty")
     private String email;
-
-    /**
-     * Encrypted password for authentication.
-     */
 
     @NotNull(message = "Password is required")
     @NotBlank(message = "Password cannot be empty")
-    @Schema(description = "Encrypted user password", example = "$2a$10$7QX... (hashed password)")
     private String password;
 
-    /**
-     * Role assigned to the user.
-     */
     @Enumerated(EnumType.STRING)
-    @Schema(description = "User's role in the system", example = "USER")
     private Role role;
 
-    /**
-     * Timestamp of when the user was created.
-     */
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Article> articles = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_theme_subscriptions",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "theme_id")
+    )
+    private List<Theme> subscribedThemes = new ArrayList<>();
+
     @Column(name= "created_at", nullable = false)
     @JsonProperty("created_at")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss")
-    @Schema(description = "Timestamp when the rental was created", example = "2024/02/01 12:00:00")
-    private String createdAt;
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+    private LocalDateTime createdAt;
 
-    /**
-     * Timestamp of the last update to the user record.
-     */
     @Column(name= "updated_at", nullable = false)
     @JsonProperty("updated_at")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd HH:mm:ss")
-    @Schema(description = "Timestamp when the rental was created", example = "2024/02/01 12:00:00")
-    private String updatedAt;
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+    private LocalDateTime updatedAt;
+
+    // Helpers to maintain bidirectional consistency.
+
+    public void subscribeToTheme(Theme theme) {
+        this.subscribedThemes.add(theme);
+        theme.getSubscribers().add(this);
+    }
+
+    public void unsubscribeFromTheme(Theme theme) {
+        this.subscribedThemes.remove(theme);
+        theme.getSubscribers().remove(this);
+    }
 
     /**
      * Returns the authorities granted to the user based on their role.
