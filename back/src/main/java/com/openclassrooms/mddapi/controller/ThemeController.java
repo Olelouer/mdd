@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * REST Controller handling themes operations (CRUD).
  */
 @RestController
-@RequestMapping("/themes")
+@RequestMapping("/api/themes")
 @RequiredArgsConstructor
 public class ThemeController {
     private final ThemeService themeService;
