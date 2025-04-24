@@ -18,7 +18,7 @@ public class UserMapper {
         return User.builder()
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .name(request.getName())
+                .username(request.getUsername())
                 .role(Role.USER)
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())

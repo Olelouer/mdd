@@ -29,7 +29,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "email"),
+        @UniqueConstraint(columnNames = "name")
+})
 @Schema(description = "Entity representing a registered user in the system")
 public class User implements UserDetails {
     @Id
@@ -37,9 +40,9 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(unique = true)
-    @NotNull(message = "Name is required")
-    @NotBlank(message = "Name cannot be empty")
-    private String name;
+    @NotNull(message = "Username is required")
+    @NotBlank(message = "Username cannot be empty")
+    private String username;
 
     @Column(unique = true)
     @NotNull(message = "Email is required")
@@ -102,13 +105,13 @@ public class User implements UserDetails {
     }
 
     /**
-     * Returns the email as the username for authentication purposes.
+     * Returns the username.
      *
-     * @return The user's email.
+     * @return The user's username.
      */
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     /**

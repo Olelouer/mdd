@@ -10,16 +10,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class RegisterRequest {
-
-    @NotBlank(message = "Email cannot be empty")
-    @NotNull(message = "Email is required")
+@AllArgsConstructor
+public class AuthenticationRequest {
     private String email;
 
-    @NotNull(message = "Username is required")
-    @NotBlank(message = "Username cannot be empty")
     private String username;
 
     @NotNull(message = "Password is required")

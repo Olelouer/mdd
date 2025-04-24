@@ -1,8 +1,8 @@
 package com.openclassrooms.mddapi.controller;
 
+import com.openclassrooms.mddapi.dto.AuthenticationRequest;
 import com.openclassrooms.mddapi.dto.AuthenticationResponse;
 import com.openclassrooms.mddapi.dto.RegisterRequest;
-import com.openclassrooms.mddapi.mapper.UserMapper;
 import com.openclassrooms.mddapi.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final AuthService authService;
-    private final UserMapper userMapper;
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(@Valid @RequestBody RegisterRequest request) {
         return ResponseEntity.ok(authService.register(request));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationResponse> authenticate(@Valid @RequestBody AuthenticationRequest request) {
+        return ResponseEntity.ok(authService.authenticate(request));
     }
 }
