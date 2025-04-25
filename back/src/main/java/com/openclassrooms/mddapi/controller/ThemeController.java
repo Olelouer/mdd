@@ -18,9 +18,9 @@ public class ThemeController {
     private final ThemeService themeService;
 
     /**
-     * Gets all themes
+     * Retrieves a list of all available themes.
      *
-     * @return List of themes
+     * @return a ResponseEntity containing a ThemeListResponse object with the list of themes
      */
     @GetMapping
     public ResponseEntity<ThemeListResponse> getAllThemes() {

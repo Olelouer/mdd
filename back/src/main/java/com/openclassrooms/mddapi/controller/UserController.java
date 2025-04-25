@@ -16,15 +16,21 @@ public class UserController {
     private final UserService userService;
 
     /**
-     * Get current user
+     * Retrieves the currently authenticated user's information.
      *
-     * @return Current user
+     * @return a ResponseEntity containing the UserResponse object with the user's details
      */
     @GetMapping("/me")
     public ResponseEntity<UserResponse> getCurrentUser() {
         return ResponseEntity.ok(userService.getCurrentUser());
     }
 
+    /**
+     * Updates the currently authenticated user's information.
+     *
+     * @param userRequest the request containing the updated user details
+     * @return a ResponseEntity containing a GlobalMessageResponse indicating the result of the operation
+     */
     @PutMapping("/me")
     public ResponseEntity<GlobalMessageResponse> updateCurrentUser(@Valid @RequestBody UserRequest userRequest) {
         return ResponseEntity.ok(userService.updateCurrentUser(userRequest));

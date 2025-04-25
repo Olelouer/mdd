@@ -24,6 +24,12 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    /**
+     * Handles Username duplication conflict
+     *
+     * @param ex the conflict exception
+     * @return Username conflict error message
+     */
     @ExceptionHandler(EmailAlreadyExistsException.class)
     public ResponseEntity<Map<String, String>> handleEmailAlreadyExists(EmailAlreadyExistsException ex) {
         Map<String, String> error = new HashMap<>();
@@ -31,6 +37,12 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.CONFLICT);
     }
 
+    /**
+     * Handles Email duplication conflict
+     *
+     * @param ex the conflict exception
+     * @return Email conflict error message
+     */
     @ExceptionHandler(UsernameAlreadyExistsException.class)
     public ResponseEntity<Map<String, String>> handleUsernameAlreadyExists(UsernameAlreadyExistsException ex) {
         Map<String, String> error = new HashMap<>();

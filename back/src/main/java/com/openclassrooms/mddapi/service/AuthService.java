@@ -26,7 +26,6 @@ public class AuthService {
      * Registers a new user, encodes their password, assigns a role, and generates a JWT token.
      *
      * @param request The registration request containing user details.
-     *
      * @return AuthenticationResponse containing the generated JWT token.
      */
     public AuthenticationResponse register(RegisterRequest request) {
@@ -45,7 +44,6 @@ public class AuthService {
      * Authenticates a user by verifying credentials and generating a JWT token.
      *
      * @param request The authentication request containing email and password.
-     *
      * @return AuthenticationResponse containing the generated JWT token.
      */
     public AuthenticationResponse authenticate(AuthenticationRequest request) {

@@ -25,6 +25,13 @@ public class ArticleService {
     private final UserRepository userRepository;
     private final ThemeRepository themeRepository;
 
+    /**
+     * Creates a new article
+     *
+     * @param articleRequest the request containing the article's details
+     *
+     * @return a GlobalMessageResponse indicating the result of the operation
+     */
     public GlobalMessageResponse createArticle(ArticleRequest articleRequest) {
         try {
             User user = userRepository.findById(articleRequest.getUserId())
@@ -46,20 +53,20 @@ public class ArticleService {
     }
 
     /**
-     * Retrieves all articles
+     * Retrieves a list of all available articles.
      *
-     * @return List of articles
+     * @return an ArticleListResponse object with the list of articles
      */
     public ArticleListResponse getAllArticles() {
         return new ArticleListResponse(articleMapper.toResponseList(articleRepository.findAll()));
     }
 
     /**
-     * Retrieves an article by id
+     * Retrieves a specific article by its ID.
      *
-     * @param id
-     *
-     * @return Article
+     * @param id the ID of the article to retrieve
+     * @return an ArticleResponse object with the article's details
+     * @throws IllegalArgumentException if the article is not found with the given ID
      */
     public ArticleResponse getArticle(Long id) {
         Article article = articleRepository.findById(id)

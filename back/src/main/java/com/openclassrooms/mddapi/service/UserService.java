@@ -38,6 +38,14 @@ public class UserService {
                 .orElseThrow(() -> new BadCredentialsException("User not found"));
     }
 
+    /**
+     * Updates the currently authenticated user's information.
+     *
+     * @param userRequest The UserRequest object containing the updated user information.
+     *
+     * @return A GlobalMessageResponse indicating the success of the update operation.
+     * @throws BadCredentialsException if the authenticated user is not found in the repository.
+     */
     @Transactional
     public GlobalMessageResponse updateCurrentUser(UserRequest userRequest) {
 
@@ -70,11 +78,16 @@ public class UserService {
             userRepository.save(updatedUser);
             return new GlobalMessageResponse("User updated successfully");
         } else {
-            // Aucun champ valide à mettre à jour n'a été fourni
             return new GlobalMessageResponse("No changes detected or provided for update.");
         }
     }
 
+    /**
+     * Retrieves the user associated with the currently authenticated username.
+     *
+     * @return an Optional containing the user if found, or an empty Optional if not found
+     * @throws BadCredentialsException if there is no authenticated user
+     */
     public Optional<User> findByUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !authentication.isAuthenticated()) {

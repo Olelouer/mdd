@@ -20,10 +20,10 @@ public class AuthController {
     private final AuthService authService;
 
     /**
-     * Registers a new user
-     * 
-     * @param registerRequest
-     * @return token
+     * Handles user registration.
+     *
+     * @param registerRequest the request containing the user's registration details
+     * @return a ResponseEntity containing an AuthenticationResponse object with the registration result
      */
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(@Valid @RequestBody RegisterRequest registerRequest) {
@@ -31,10 +31,10 @@ public class AuthController {
     }
 
     /**
-     * Logs a user
+     * Handles user authentication.
      *
-     * @param authenticationRequest
-     * @return token
+     * @param authenticationRequest the request containing the user's authentication credentials
+     * @return a ResponseEntity containing an AuthenticationResponse object with the authentication result
      */
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> authenticate(@Valid @RequestBody AuthenticationRequest authenticationRequest) {

@@ -17,11 +17,10 @@ public class ArticleController {
     private final ArticleService articleService;
 
     /**
-     * Creates a new article
+     * Creates a new article based on the provided ArticleRequest.
      *
-     * @param articleRequest
-     *
-     * @return GlobalMessageResponse
+     * @param articleRequest the request containing the article's details
+     * @return a ResponseEntity containing a GlobalMessageResponse indicating the result of the operation
      */
     @PostMapping
     public ResponseEntity<GlobalMessageResponse> createArticle(@Valid @RequestBody ArticleRequest articleRequest) {
@@ -29,9 +28,9 @@ public class ArticleController {
     }
 
     /**
-     * Gets all articles
+     * Retrieves a list of all available articles.
      *
-     * @return List of articles
+     * @return a ResponseEntity containing an ArticleListResponse object with the list of articles
      */
     @GetMapping
     public ResponseEntity<ArticleListResponse> getAllArticles() {
@@ -39,11 +38,10 @@ public class ArticleController {
     }
 
     /**
-     * Gets a single article
+     * Retrieves a specific article by its ID.
      *
-     * @param id
-     *
-     * @return Article
+     * @param id the ID of the article to retrieve
+     * @return a ResponseEntity containing an ArticleResponse object with the article's details
      */
     @GetMapping("/{id}")
     public ResponseEntity<ArticleResponse> getArticle(@PathVariable Long id) {

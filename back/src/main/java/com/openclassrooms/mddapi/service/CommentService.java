@@ -26,8 +26,7 @@ public class CommentService {
     /**
      * Create a new comment
      *
-     * @param commentRequest
-     *
+     * @param commentRequest the request containing the comment's details
      * @return GlobaleMessageResponse
      */
     public GlobalMessageResponse createComment(CommentRequest commentRequest) {

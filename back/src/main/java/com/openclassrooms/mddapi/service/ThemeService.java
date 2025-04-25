@@ -13,9 +13,9 @@ public class ThemeService {
     private final ThemeMapper themeMapper;
 
     /**
-     * Retrieves all themes
+     * Retrieves a list of all available themes.
      *
-     * @return List of themes
+     * @return an ThemeListResponse object with the list of themes
      */
     public ThemeListResponse getAllThemes() {
         return new ThemeListResponse(themeMapper.toResponseList(themeRepository.findAll()));

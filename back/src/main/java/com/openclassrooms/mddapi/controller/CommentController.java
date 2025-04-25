@@ -18,11 +18,10 @@ public class CommentController {
     private final CommentService commentService;
 
     /**
-     * Creates a new comment
+     * Creates a new comment based on the provided CommentRequest.
      *
-     * @param commentRequest
-     *
-     * @return GlobalMessageResponse
+     * @param commentRequest the request containing the comment's details
+     * @return a ResponseEntity containing a GlobalMessageResponse indicating the result of the operation
      */
     @PostMapping
     public ResponseEntity<GlobalMessageResponse> createComment(@Valid @RequestBody CommentRequest commentRequest) {
