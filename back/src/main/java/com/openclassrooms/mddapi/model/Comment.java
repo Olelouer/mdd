@@ -23,10 +23,10 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Description cannot be empty")
-    @NotNull(message = "Description cannot be null")
+    @NotBlank(message = "Content cannot be empty")
+    @NotNull(message = "Content cannot be null")
     @Column(nullable = false)
-    private String description;
+    private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
