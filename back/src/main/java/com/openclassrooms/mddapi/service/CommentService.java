@@ -45,7 +45,7 @@ public class CommentService {
 
             return new GlobalMessageResponse("Comment created successfully");
         } catch (Exception ex) {
-            log.error("Unexpected error while creating message: {}", ex.getMessage(), ex);
+            log.error("Unexpected error while creating comment: {}", ex.getMessage(), ex);
             return new GlobalMessageResponse(ex.getMessage());
         }
     }

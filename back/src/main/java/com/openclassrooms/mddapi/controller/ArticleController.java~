@@ -23,10 +23,10 @@ public class ArticleController {
      *
      * @return GlobalMessageResponse
      */
-    @PostMapping
+    /*@PostMapping
     public ResponseEntity<GlobalMessageResponse> createArticle(@Valid @RequestBody ArticleRequest articleRequest) {
         return ResponseEntity.ok(articleService.createArticle(articleRequest));
-    }
+    }*/
 
     /**
      * Gets all articles

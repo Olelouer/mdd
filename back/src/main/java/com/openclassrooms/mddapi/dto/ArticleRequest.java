@@ -28,4 +28,10 @@ public class ArticleRequest {
 
     @JsonProperty("updated_at")
     private LocalDateTime updatedAt;
+
+    @NotNull(message = "User ID is required")
+    private Long userId;
+
+    @NotNull(message = "Theme ID is required")
+    private Long themeId;
 }
