@@ -11,11 +11,11 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ArticleResponse {
+public class UserResponse {
     private Long id;
-    private String title;
-    private String content;
+    private String username;
+    private String email;
+    private String role;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private ThemeResponse theme;
 }

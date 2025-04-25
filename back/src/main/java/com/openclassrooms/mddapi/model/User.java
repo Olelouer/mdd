@@ -8,6 +8,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -47,6 +48,7 @@ public class User implements UserDetails {
     @Column(unique = true)
     @NotNull(message = "Email is required")
     @NotBlank(message = "Email cannot be empty")
+    @Email(message = "Email format is invalid")
     private String email;
 
     @NotNull(message = "Password is required")
@@ -81,18 +83,6 @@ public class User implements UserDetails {
     @JsonProperty("updated_at")
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     private LocalDateTime updatedAt;
-
-    // Helpers to maintain bidirectional consistency.
-
-    public void subscribeToTheme(Theme theme) {
-        this.subscribedThemes.add(theme);
-        theme.getSubscribers().add(this);
-    }
-
-    public void unsubscribeFromTheme(Theme theme) {
-        this.subscribedThemes.remove(theme);
-        theme.getSubscribers().remove(this);
-    }
 
     /**
      * Returns the authorities granted to the user based on their role.

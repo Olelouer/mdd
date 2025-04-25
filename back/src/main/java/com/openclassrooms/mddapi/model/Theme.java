@@ -36,7 +36,7 @@ public class Theme {
     @Column(nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "theme", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "theme", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Article> articles = new ArrayList<>();
 
     @ManyToMany(mappedBy = "subscribedThemes")
@@ -51,16 +51,4 @@ public class Theme {
     @JsonProperty("updated_at")
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     private LocalDateTime updatedAt;
-
-    // Helpers to maintain bidirectional consistency.
-
-    public void addArticle(Article article) {
-        articles.add(article);
-        article.setTheme(this);
-    }
-
-    public void removeArticle(Article article) {
-        articles.remove(article);
-        article.setTheme(null);
-    }
 }
