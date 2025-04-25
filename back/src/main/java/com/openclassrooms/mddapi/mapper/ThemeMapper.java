@@ -19,15 +19,6 @@ public class ThemeMapper {
                 .build();
     }
 
-    public Theme toEntity(ThemeResponse themeResponse) {
-        return Theme.builder()
-                .title(themeResponse.getTitle())
-                .description(themeResponse.getDescription())
-                .createdAt(themeResponse.getCreatedAt())
-                .updatedAt(themeResponse.getUpdatedAt())
-                .build();
-    }
-
     public List<ThemeResponse> toResponseList(List<Theme> themes) {
         return themes.stream()
                 .map(this::toResponse)

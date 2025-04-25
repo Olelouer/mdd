@@ -18,7 +18,7 @@ public class ThemeController {
     private final ThemeService themeService;
 
     /**
-     * Retrieves all themes
+     * Gets all themes
      *
      * @return List of themes
      */

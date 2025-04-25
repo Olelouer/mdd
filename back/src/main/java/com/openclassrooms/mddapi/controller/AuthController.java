@@ -19,11 +19,23 @@ public class AuthController {
 
     private final AuthService authService;
 
+    /**
+     * Registers a new user
+     * 
+     * @param registerRequest
+     * @return token
+     */
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(@Valid @RequestBody RegisterRequest registerRequest) {
         return ResponseEntity.ok(authService.register(registerRequest));
     }
 
+    /**
+     * Logs a user
+     *
+     * @param authenticationRequest
+     * @return token
+     */
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> authenticate(@Valid @RequestBody AuthenticationRequest authenticationRequest) {
         return ResponseEntity.ok(authService.authenticate(authenticationRequest));

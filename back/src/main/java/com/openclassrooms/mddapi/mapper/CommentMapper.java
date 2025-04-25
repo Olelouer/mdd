@@ -15,5 +15,4 @@ public class CommentMapper {
                 .updatedAt(LocalDateTime.now())
                 .build();
     }
-
 }

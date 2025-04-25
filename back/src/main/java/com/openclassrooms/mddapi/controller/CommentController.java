@@ -17,6 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class CommentController {
     private final CommentService commentService;
 
+    /**
+     * Creates a new comment
+     *
+     * @param commentRequest
+     *
+     * @return GlobalMessageResponse
+     */
     @PostMapping
     public ResponseEntity<GlobalMessageResponse> createComment(@Valid @RequestBody CommentRequest commentRequest) {
         return ResponseEntity.ok(commentService.createComment(commentRequest));
