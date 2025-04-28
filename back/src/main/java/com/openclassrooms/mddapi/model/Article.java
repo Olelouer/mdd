@@ -55,16 +55,4 @@ public class Article {
     @JsonProperty("updated_at")
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     private LocalDateTime updatedAt;
-
-    // Helpers to maintain bidirectional consistency.
-
-    public void addComment(Comment comment) {
-        comments.add(comment);
-        comment.setArticle(this);
-    }
-
-    public void removeComment(Comment comment) {
-        comments.remove(comment);
-        comment.setArticle(null);
-    }
 }

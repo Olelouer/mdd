@@ -34,7 +34,7 @@ public class UserService {
         Optional<User> userOptional = findByUsername();
 
         return userOptional
-                .map(userMapper::toDto)
+                .map(userMapper::toResponse)
                 .orElseThrow(() -> new BadCredentialsException("User not found"));
     }
 

@@ -1,8 +1,6 @@
 package com.openclassrooms.mddapi.mapper;
 
-import com.openclassrooms.mddapi.dto.ArticleRequest;
-import com.openclassrooms.mddapi.dto.ArticleResponse;
-import com.openclassrooms.mddapi.dto.ThemeResponse;
+import com.openclassrooms.mddapi.dto.*;
 import com.openclassrooms.mddapi.model.Article;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -15,12 +13,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ArticleMapper {
     private final ThemeMapper themeMapper;
+    private final UserMapper userMapper;
+    private final CommentMapper commentMapper;
 
     public ArticleResponse toResponse(Article article) {
         ThemeResponse themeResponse = null;
+        UserResponse userResponse = null;
+
         if (article.getTheme() != null) {
             themeResponse = themeMapper.toResponse(article.getTheme());
         }
+        if (article.getAuthor() != null) {
+            userResponse = userMapper.toResponse(article.getAuthor());
+        }
+
+        List<CommentResponse> commentResponses = commentMapper.toResponseList(article.getComments());
 
         return ArticleResponse.builder()
                 .id(article.getId())
@@ -29,6 +36,8 @@ public class ArticleMapper {
                 .createdAt(article.getCreatedAt())
                 .updatedAt(article.getUpdatedAt())
                 .theme(themeResponse)
+                .author(userResponse)
+                .comments(commentResponses)
                 .build();
     }
 

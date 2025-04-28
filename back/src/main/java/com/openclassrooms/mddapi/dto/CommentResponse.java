@@ -7,24 +7,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class ArticleResponse {
+@NoArgsConstructor
+public class CommentResponse {
     private Long id;
-    private String title;
     private String content;
-
+    private UserResponse author;
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     private LocalDateTime createdAt;
-
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     private LocalDateTime updatedAt;
-
-    private ThemeResponse theme;
-    private UserResponse author;
-    private List<CommentResponse> comments;
 }
