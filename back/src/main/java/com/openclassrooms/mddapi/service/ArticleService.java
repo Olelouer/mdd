@@ -15,6 +15,14 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Pageable;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -58,6 +66,41 @@ public class ArticleService {
      */
     public ArticleListResponse getAllArticles() {
         return new ArticleListResponse(articleMapper.toResponseList(articleRepository.findAll()));
+    }
+
+
+    /**
+     * Retrieves the news feed for the given user
+     *
+     * @param currentUser The User object passed from controller
+     * @param pageable Contains sorting information
+     * @return An ArticleListResponse containing the sorted list of ArticleResponse DTOs.
+     */
+    @Transactional(readOnly = true)
+    public ArticleListResponse getFeedForUser(User currentUser, Pageable pageable) {
+
+        Set<Long> subscribedThemeIds = Collections.emptySet();
+        List<ArticleResponse> feedArticleDTOs = Collections.emptyList();
+
+        if (currentUser != null) {
+            Optional<User> managedUserOpt = userRepository.findById(currentUser.getId());
+
+            if (managedUserOpt.isPresent()) {
+                User managedUser = managedUserOpt.get();
+                if (managedUser.getSubscribedThemes() != null) {
+                    subscribedThemeIds = managedUser.getSubscribedThemes().stream()
+                            .map(Theme::getId)
+                            .collect(Collectors.toSet());
+                }
+            }
+        }
+
+        if (!subscribedThemeIds.isEmpty()) {
+            List<Article> articles = articleRepository.findByThemeIdIn(subscribedThemeIds, pageable); // Using derived query name
+            feedArticleDTOs = articleMapper.toResponseList(articles); // Assign the result here
+        }
+
+        return new ArticleListResponse(feedArticleDTOs);
     }
 
     /**

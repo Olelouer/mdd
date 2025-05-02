@@ -35,7 +35,7 @@ public class ThemeController {
      * @param currentUser Authenticated user object
      * @return List of themes with their subscription status.
      */
-    @GetMapping("/subscriptions") // Example path, choose what fits best (e.g., "/with-status")
+    @GetMapping("/subscriptions")
     public ResponseEntity<UserThemeStatusListResponse> getAllThemesWithStatus(
             @AuthenticationPrincipal User currentUser
     ) {
