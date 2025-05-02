@@ -2,6 +2,7 @@ package com.openclassrooms.mddapi.controller;
 
 import com.openclassrooms.mddapi.dto.GlobalMessageResponse;
 import com.openclassrooms.mddapi.dto.ThemeListResponse;
+import com.openclassrooms.mddapi.dto.UserThemeStatusListResponse;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.service.ThemeService;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,20 @@ public class ThemeController {
     }
 
     /**
-     * ASubscribes the authenticated user to a specific theme.
+     * Retrieves the list of all themes with current user's subscription status.
+     *
+     * @param currentUser Authenticated user object
+     * @return List of themes with their subscription status.
+     */
+    @GetMapping("/subscriptions") // Example path, choose what fits best (e.g., "/with-status")
+    public ResponseEntity<UserThemeStatusListResponse> getAllThemesWithStatus(
+            @AuthenticationPrincipal User currentUser
+    ) {
+        return ResponseEntity.ok(themeService.getAllThemesWithSubscriptionStatus(currentUser));
+    }
+
+    /**
+     * Subscribes the authenticated user to a specific theme.
      *
      * @param themeId Theme ID
      * @param currentUser Authenticated user object
@@ -44,8 +58,9 @@ public class ThemeController {
         return ResponseEntity.ok(themeService.subscribeUserToTheme(userEmail, themeId));
     }
 
+
     /**
-     * Handles HTTP request to unsubscribe authenticated user to theme
+     * Unsubscribe authenticated user to theme
      *
      * @param themeId Theme ID
      * @param currentUser Authenticated user object

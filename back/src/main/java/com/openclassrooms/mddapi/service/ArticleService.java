@@ -47,7 +47,6 @@ public class ArticleService {
 
             return new GlobalMessageResponse("Article created successfully");
         } catch (Exception ex) {
-            log.error("Unexpected error while creating article: {}", ex.getMessage(), ex);
             return new GlobalMessageResponse(ex.getMessage());
         }
     }

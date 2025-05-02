@@ -2,6 +2,8 @@ package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.dto.GlobalMessageResponse;
 import com.openclassrooms.mddapi.dto.ThemeListResponse;
+import com.openclassrooms.mddapi.dto.UserThemeStatusListResponse;
+import com.openclassrooms.mddapi.dto.UserThemeStatusResponse;
 import com.openclassrooms.mddapi.model.Theme;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.ThemeRepository;
@@ -11,7 +13,12 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +34,38 @@ public class ThemeService {
      */
     public ThemeListResponse getAllThemes() {
         return new ThemeListResponse(themeMapper.toResponseList(themeRepository.findAll()));
+    }
+
+    /**
+     * Retrieves a list of all available themes with current user's subscription status.
+     *
+     * @param currentUser Currently authenticated user
+     * @return UserThemeStatusListResponse containing the list of themes with their subscription status
+     */
+    @Transactional(readOnly = true)
+    public UserThemeStatusListResponse getAllThemesWithSubscriptionStatus(User currentUser) {
+        List<Theme> allThemes = themeRepository.findAll();
+        Set<Long> subscribedThemeIds = Collections.emptySet();
+
+        if (currentUser != null) {
+            Long currentUserId = currentUser.getId();
+
+            Optional<User> managedUserOpt = userRepository.findById(currentUserId);
+
+            if(managedUserOpt.isPresent()) {
+                User managedUser = managedUserOpt.get();
+                if (managedUser.getSubscribedThemes() != null) {
+                    subscribedThemeIds = managedUser.getSubscribedThemes().stream()
+                            .map(Theme::getId)
+                            .collect(Collectors.toSet());
+                }
+            }
+        }
+
+        List<UserThemeStatusResponse> userThemeStatusResponses =
+                themeMapper.toUserThemeStatusResponseList(allThemes, subscribedThemeIds);
+
+        return new UserThemeStatusListResponse(userThemeStatusResponses);
     }
 
     /**
