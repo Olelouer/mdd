@@ -1,9 +1,6 @@
 package com.openclassrooms.mddapi.service;
 
-import com.openclassrooms.mddapi.dto.GlobalMessageResponse;
-import com.openclassrooms.mddapi.dto.ThemeListResponse;
-import com.openclassrooms.mddapi.dto.UserThemeStatusListResponse;
-import com.openclassrooms.mddapi.dto.UserThemeStatusResponse;
+import com.openclassrooms.mddapi.dto.*;
 import com.openclassrooms.mddapi.model.Theme;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.ThemeRepository;
@@ -14,10 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -66,6 +60,34 @@ public class ThemeService {
                 themeMapper.toUserThemeStatusResponseList(allThemes, subscribedThemeIds);
 
         return new UserThemeStatusListResponse(userThemeStatusResponses);
+    }
+
+    /**
+     * Retrieves themes to which the given user is subscribed.
+     * This method now uses the toResponseList from ThemeMapper.
+     *
+     * @param currentUser The user for whom to retrieve subscribed themes.
+     * @return A ThemeListResponse containing the list of subscribed themes as ThemeResponse DTOs.
+     */
+    @Transactional(readOnly = true)
+    public ThemeListResponse getSubscribedThemesByUser(User currentUser) {
+        if (currentUser == null || currentUser.getId() == null) {
+            return new ThemeListResponse(Collections.emptyList());
+        }
+
+        User managedUser = userRepository.findById(currentUser.getId())
+                .orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + currentUser.getId()));
+
+        List<Theme> subscribedThemeEntities = managedUser.getSubscribedThemes();
+
+        if (subscribedThemeEntities == null || subscribedThemeEntities.isEmpty()) {
+            return new ThemeListResponse(Collections.emptyList());
+        }
+
+        List<ThemeResponse> subscribedThemeResponses =
+                themeMapper.toResponseList(subscribedThemeEntities);
+
+        return new ThemeListResponse(subscribedThemeResponses);
     }
 
     /**

@@ -43,6 +43,17 @@ public class ThemeController {
     }
 
     /**
+     * Retrieves the list of themes to which the current user is subscribed.
+     *
+     * @param currentUser Authenticated user object
+     * @return a ResponseEntity containing a ThemeListResponse with the subscribed themes.
+     */
+    @GetMapping("/subscribed")
+    public ResponseEntity<ThemeListResponse> getSubscribedThemes(@AuthenticationPrincipal User currentUser) {
+        return ResponseEntity.ok(themeService.getSubscribedThemesByUser(currentUser));
+    }
+
+    /**
      * Subscribes the authenticated user to a specific theme.
      *
      * @param themeId Theme ID
