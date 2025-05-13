@@ -1,0 +1,16 @@
+/**
+ * Generates a clamp() function for responsive sizing between breakpoints.
+ * 
+ * @param {Length} $size-at-min-width - Size at the smallest breakpoint.
+ * @param {Length} $size-at-max-width - Size at the largest breakpoint.
+ * @param {Length} $min-width - Minimum viewport width (default: 375px).
+ * @param {Length} $max-width - Maximum viewport width (default: 1440px).
+ */
+@function clamp-calc($size-at-min-width, $size-at-max-width, $min-width : 300px, $max-width : 1440px) {
+    $slope: (
+        $size-at-max-width - $size-at-min-width) / ($max-width - $min-width
+    );
+$y-axis-intersection: -1 * $min-width * $slope + $size-at-min-width;
+$return-value: clamp(#{$size-at-min-width}, #{$y-axis-intersection} + #{$slope} * 100vw, #{$size-at-max-width});
+@return $return-value;
+}

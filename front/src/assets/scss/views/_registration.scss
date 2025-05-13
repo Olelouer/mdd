@@ -1,0 +1,12 @@
+@use '../config/mixins' as fn;
+
+#registrationView {
+
+    .registration-ctn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 30px;
+    }
+}

@@ -1,0 +1,42 @@
+<form (ngSubmit)="registrationForm.form.valid && onSubmit()" id="connectionForm" #connectionForm="ngForm" novalidate>
+    <div class="main-input">
+        <label for="login">E-mail ou nom d’utilisateur</label>
+        <input type="text" id="login" name="login" [(ngModel)]="registrationData.login" #login="ngModel" required
+            [ngClass]="{ 'is-invalid': registrationForm.submitted && login.invalid }">
+
+        @if (registrationForm.submitted && login.invalid) {
+        <div class="invalid-feedback">
+            @if (login.errors?.['required']) {
+            <div>Nom d'utilisateur ou e-mail requis.</div>
+            }
+            @if (login.errors?.['login']) {
+            <div>Format nom d'utilisateur ou e-mail invalide.</div>
+            }
+        </div>
+        }
+    </div>
+
+    <div class="main-input">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password" [(ngModel)]="registrationData.password" #password="ngModel"
+            required minlength="8" [ngClass]="{ 'is-invalid': registrationForm.submitted && password.invalid }">
+
+        @if (registrationForm.submitted && password.invalid) {
+        <div class="invalid-feedback">
+            @if (password.errors?.['required']) {
+            <div>Le mot de passe est requis.</div>
+            }
+            @if (password.errors?.['minlength']) {
+            <div>Doit contenir au moins 8 caractères.</div>
+            }
+            @if (password.errors?.['pattern']) {
+            <div>Doit contenir majuscule, minuscule, chiffre et caractère spécial.</div>
+            }
+        </div>
+        }
+    </div>
+
+    <button class="-small" mat-button type="submit">
+        <span>Se connecter</span>
+    </button>
+</form>

@@ -1,0 +1,57 @@
+@use '../variables' as vars;
+
+button {
+    height: 40px !important;
+    border-radius: 8px !important;
+    transition: vars.$basic-transition;
+
+    &.-small {
+        width: 128px !important;
+    }
+}
+
+button[mat-stroked-button] {
+    border-width: 1px;
+    border-color: vars.$black;
+    width: 156px;
+    font-weight: 600;
+
+    .mdc-button__outline {
+        border-color: vars.$black;
+        transition: vars.$basic-transition;
+    }
+
+    .mdc-button__label {
+        color: vars.$black;
+        transition: vars.$basic-transition;
+    }
+
+    &:hover,
+    &:focus {
+        background-color: vars.$primary-button-bg;
+
+        .mdc-button__outline {
+            border-color: vars.$primary-button-bg;
+        }
+
+        .mdc-button__label {
+            color: vars.$white;
+        }
+    }
+}
+
+button[mat-button] {
+    background-color: vars.$primary-button-bg;
+    width: 156px;
+    font-weight: 600;
+
+    .mdc-button__label {
+        color: vars.$white;
+        transition: vars.$basic-transition;
+    }
+
+    &:hover,
+    &:focus {
+        background-color: vars.$black;
+    }
+}

@@ -1,0 +1,18 @@
+@use './variables' as vars;
+
+.main-input {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: vars.$small-size;
+}
+
+input {
+    height: 50px;
+    width: 250px;
+    border: 1px solid vars.$black;
+    border-radius: 8px;
+    padding: 0 10px;
+}

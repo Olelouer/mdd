@@ -1,0 +1,12 @@
+@use '../config/mixins' as fn;
+@use '../variables' as vars;
+
+#header {
+    padding: 10px 20px;
+    border-bottom: 1px solid vars.$black;
+
+    .img-ctn {
+        display: flex;
+        width: fn.clamp-calc(92px, 200px);
+    }
+}

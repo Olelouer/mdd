@@ -1,19 +1,33 @@
-
-// Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
+@use './assets/scss/variables' as vars;
+@use './assets/scss/fonts';
+@use './assets/scss/typography';
+@use './assets/scss/layout';
+@use './assets/scss/global';
+@use './assets/scss/forms';
+
+// Views
+@use './assets/scss/views/homepage';
+@use './assets/scss/views/registration';
+
+// Components
+@use './assets/scss/components/buttons';
+@use './assets/scss/components/header';
+@use './assets/scss/components/back-arrow';
+
+//Forms
+@use './assets/scss/components/forms/registration-form';
 
 html {
-  @include mat.theme((
-    color: (
-      theme-type: light,
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
-}/* You can add global styles to this file, and also import other style files */
+  @include mat.theme((color: (theme-type: light,
+      ),
+      typography: vars.$primary-font,
+      density: 0,
+    ));
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}

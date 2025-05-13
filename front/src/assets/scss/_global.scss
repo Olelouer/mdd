@@ -1,0 +1,31 @@
+@use './variables' as vars;
+@use './config//mixins' as fn;
+
+:focus-visible {
+    outline-color: vars.$highlight;
+    outline-style: solid;
+    outline-width: 2px;
+}
+
+body {
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
+}
+
+.title-arrow-ctn {
+    margin-top: fn.clamp-calc(40px, 70px);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    #backArrow {
+        position: absolute;
+        left: 50px;
+        top: 0;
+    }
+}

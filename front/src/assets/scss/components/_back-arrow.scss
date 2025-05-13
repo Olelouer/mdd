@@ -1,0 +1,11 @@
+@use '../variables' as vars;
+
+#backArrow {
+    display: block;
+    transition: vars.$basic-transition;
+    transform: translateX(0);
+
+    &:hover {
+        transform: translateX(-5px);
+    }
+}
