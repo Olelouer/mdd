@@ -5,8 +5,19 @@ button {
     border-radius: 8px !important;
     transition: vars.$basic-transition;
 
+    .mat-mdc-button-touch-target {
+        border-radius: 8px !important;
+        height: 40px !important;
+        transition: vars.$basic-transition;
+    }
+
     &.-small {
         width: 128px !important;
+    }
+
+    &:disabled {
+        cursor: not-allowed !important;
+        opacity: 0.5;
     }
 }
 
@@ -28,7 +39,9 @@ button[mat-stroked-button] {
 
     &:hover,
     &:focus {
-        background-color: vars.$primary-button-bg;
+        .mat-mdc-button-touch-target {
+            background-color: vars.$primary-button-bg;
+        }
 
         .mdc-button__outline {
             border-color: vars.$primary-button-bg;
@@ -41,9 +54,12 @@ button[mat-stroked-button] {
 }
 
 button[mat-button] {
-    background-color: vars.$primary-button-bg;
     width: 156px;
     font-weight: 600;
+
+    .mat-mdc-button-touch-target {
+        background-color: vars.$primary-button-bg;
+    }
 
     .mdc-button__label {
         color: vars.$white;
@@ -52,6 +68,8 @@ button[mat-button] {
 
     &:hover,
     &:focus {
-        background-color: vars.$black;
+        .mat-mdc-button-touch-target {
+            background-color: vars.$black;
+        }
     }
 }

@@ -17,16 +17,12 @@ export class RegistrationFormComponent {
     email: '',
     password: ''
   }
-  isLoading: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
   onSubmit(): void {
-    this.isLoading = true;
-
     this.authService.register(this.registrationData).subscribe({
       next: (response: AuthenticationResponse) => {
-        this.isLoading = false;
         console.log('Success: ' + response);
       },
       error: (error: Error) => { console.log(error) }

@@ -10,6 +10,7 @@
 // Views
 @use './assets/scss/views/homepage';
 @use './assets/scss/views/registration';
+@use './assets/scss/views/connection';
 
 // Components
 @use './assets/scss/components/buttons';
@@ -18,6 +19,7 @@
 
 //Forms
 @use './assets/scss/components/forms/registration-form';
+@use './assets/scss/components/forms/connection-form';
 
 html {
   @include mat.theme((color: (theme-type: light,

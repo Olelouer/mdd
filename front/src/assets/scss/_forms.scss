@@ -12,7 +12,20 @@ label {
 input {
     height: 50px;
     width: 250px;
+    max-width: 100%;
     border: 1px solid vars.$black;
     border-radius: 8px;
     padding: 0 10px;
+    font-size: vars.$medium-size;
+
+    &.is-invalid {
+        outline-color: vars.$warning;
+        outline-style: solid;
+        outline-width: 2px;
+    }
+}
+
+.input-error {
+    font-size: vars.$x-small-size;
+    color: vars.$warning;
 }

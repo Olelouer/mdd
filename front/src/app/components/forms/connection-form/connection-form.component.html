@@ -1,16 +1,13 @@
-<form (ngSubmit)="registrationForm.form.valid && onSubmit()" id="connectionForm" #connectionForm="ngForm" novalidate>
+<form (ngSubmit)="connectionForm.form.valid && onSubmit()" id="connectionForm" #connectionForm="ngForm" novalidate>
     <div class="main-input">
-        <label for="login">E-mail ou nom d’utilisateur</label>
-        <input type="text" id="login" name="login" [(ngModel)]="registrationData.login" #login="ngModel" required
-            [ngClass]="{ 'is-invalid': registrationForm.submitted && login.invalid }">
+        <label for="loginOrEmail">E-mail ou nom d’utilisateur</label>
+        <input type="text" id="loginOrEmail" name="loginOrEmail" [(ngModel)]="formData.loginOrEmail"
+            #loginModel="ngModel" required [ngClass]="{ 'is-invalid': connectionForm.submitted && loginModel.invalid }">
 
-        @if (registrationForm.submitted && login.invalid) {
+        @if (connectionForm.submitted && loginModel.invalid) {
         <div class="invalid-feedback">
-            @if (login.errors?.['required']) {
-            <div>Nom d'utilisateur ou e-mail requis.</div>
-            }
-            @if (login.errors?.['login']) {
-            <div>Format nom d'utilisateur ou e-mail invalide.</div>
+            @if (loginModel.errors?.['required']) {
+            <span class="input-error">Nom d'utilisateur ou e-mail requis.</span>
             }
         </div>
         }
@@ -18,25 +15,26 @@
 
     <div class="main-input">
         <label for="password">Mot de passe</label>
-        <input type="password" id="password" name="password" [(ngModel)]="registrationData.password" #password="ngModel"
-            required minlength="8" [ngClass]="{ 'is-invalid': registrationForm.submitted && password.invalid }">
+        <input type="password" id="password" name="password" [(ngModel)]="formData.password" #passwordModel="ngModel"
+            required minlength="8" [ngClass]="{ 'is-invalid': connectionForm.submitted && passwordModel.invalid }">
 
-        @if (registrationForm.submitted && password.invalid) {
+        @if (connectionForm.submitted && passwordModel.invalid) {
         <div class="invalid-feedback">
-            @if (password.errors?.['required']) {
-            <div>Le mot de passe est requis.</div>
+            @if (passwordModel.errors?.['required']) {
+            <span class="input-error">Le mot de passe est requis.</span>
             }
-            @if (password.errors?.['minlength']) {
-            <div>Doit contenir au moins 8 caractères.</div>
-            }
-            @if (password.errors?.['pattern']) {
-            <div>Doit contenir majuscule, minuscule, chiffre et caractère spécial.</div>
+            @if (passwordModel.errors?.['minlength']) {
+            <span class="input-error">Doit contenir au moins 8 caractères.</span>
             }
         </div>
         }
     </div>
 
-    <button class="-small" mat-button type="submit">
-        <span>Se connecter</span>
-    </button>
+    @if (errorMessage) {
+    <div class="server-error-feedback">
+        {{ errorMessage }}
+    </div>
+    }
+
+    <button class="-small" mat-button type="submit" [disabled]="!connectionForm.form.valid">Se connecter</button>
 </form>

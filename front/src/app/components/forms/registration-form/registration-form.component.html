@@ -8,10 +8,10 @@
         @if (registrationForm.submitted && username.invalid) {
         <div class="invalid-feedback">
             @if (username.errors?.['required']) {
-            <div>Le nom d'utilisateur est requis.</div>
+            <span class="input-error">Le nom d'utilisateur est requis.</span>
             }
             @if (username.errors?.['minlength']) {
-            <div>Doit contenir au moins 3 caractères.</div>
+            <span class="input-error">Doit contenir au moins 3 caractères.</span>
             }
         </div>
         }
@@ -25,10 +25,10 @@
         @if (registrationForm.submitted && email.invalid) {
         <div class="invalid-feedback">
             @if (email.errors?.['required']) {
-            <div>L'adresse e-mail est requise.</div>
+            <span class="input-error">L'adresse e-mail est requise.</span>
             }
             @if (email.errors?.['email']) {
-            <div>Format d'e-mail invalide.</div>
+            <span class="input-error">Format d'e-mail invalide.</span>
             }
         </div>
         }
@@ -42,24 +42,17 @@
         @if (registrationForm.submitted && password.invalid) {
         <div class="invalid-feedback">
             @if (password.errors?.['required']) {
-            <div>Le mot de passe est requis.</div>
+            <span class="input-error">Le mot de passe est requis.</span>
             }
             @if (password.errors?.['minlength']) {
-            <div>Doit contenir au moins 8 caractères.</div>
+            <span class="input-error">Doit contenir au moins 8 caractères.</span>
             }
             @if (password.errors?.['pattern']) {
-            <div>Doit contenir majuscule, minuscule, chiffre et caractère spécial.</div>
+            <span class="input-error">Doit contenir majuscule, minuscule, chiffre et caractère spécial.</span>
             }
         </div>
         }
     </div>
 
-    <button class="-small" mat-button type="submit" [disabled]="isLoading">
-        @if (isLoading) {
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        <span> Inscription...</span>
-        } @else {
-        <span>S'inscrire</span>
-        }
-    </button>
+    <button class="-small" mat-button type="submit" [disabled]="!registrationForm.form.valid">S'inscrire</button>
 </form>
