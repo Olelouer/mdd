@@ -3,20 +3,22 @@
 .main-input {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 label {
     font-size: vars.$small-size;
 }
 
-input {
+.main-input input {
     height: 50px;
     width: 250px;
-    max-width: 100%;
     border: 1px solid vars.$black;
     border-radius: 8px;
     padding: 0 10px;
     font-size: vars.$medium-size;
+    display: flex;
+    box-sizing: border-box;
 
     &.is-invalid {
         outline-color: vars.$warning;
@@ -28,4 +30,10 @@ input {
 .input-error {
     font-size: vars.$x-small-size;
     color: vars.$warning;
+}
+
+@media (max-width: 300px) {
+    .main-input input {
+        width: 100%;
+    }
 }

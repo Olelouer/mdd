@@ -1,3 +1,5 @@
+@use '../variables' as vars;
+
 #registrationView {
 
     .registration-ctn {
@@ -6,5 +8,11 @@
         align-items: center;
         flex-direction: column;
         gap: 30px;
+    }
+}
+
+@media (max-width: vars.$mobile) {
+    #header {
+        display: none;
     }
 }

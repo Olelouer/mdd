@@ -1,5 +1,6 @@
 @use './variables' as vars;
-@use './config//mixins' as fn;
+@use './mixins' as fn;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
 :focus-visible {
     outline-color: vars.$highlight;
@@ -9,23 +10,87 @@
 
 body {
     margin: 0;
+    font-family: vars.$primary-font;
+    font-size: vars.$medium-size;
+}
+
+// Typography
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+div,
+input,
+select {
+    font-family: vars.$primary-font;
+}
+
+h1 {
+    font-size: vars.$large-size;
+    font-weight: 700;
+    position: relative;
+
+
+
+    &.-small {
+        font-weight: 400;
+    }
 }
 
 img {
     max-width: 100%;
 }
 
+// Global container style
+.container {
+    max-width: 1000px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 0 15px;
+}
+
+// Global elements style
 .title-arrow-ctn {
     margin-top: fn.clamp-calc(40px, 70px);
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 100%;
+
+    h1 {
+        text-align: center;
+    }
+
+    .logo-ctn {
+        display: none;
+    }
 
     #backArrow {
         position: absolute;
         left: 50px;
         top: 0;
+    }
+}
+
+@media (max-width: vars.$mobile) {
+    .title-arrow-ctn {
+
+        .logo-ctn {
+            display: flex;
+            width: fn.clamp-calc(225px, 300px, 300px, 767px);
+            margin: auto;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        #backArrow {
+            position: initial;
+            margin-right: auto;
+            margin-bottom: 30px;
+        }
     }
 }
