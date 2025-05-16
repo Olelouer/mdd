@@ -5,6 +5,7 @@
 @use './assets/scss/global';
 @use './assets/scss/forms';
 @use './assets/scss/buttons';
+@use './assets/scss/animations';
 
 // Views
 @use './assets/scss/views/homepage';
@@ -18,6 +19,7 @@
 @use './assets/scss/components/connection-form';
 @use './assets/scss/components/back-arrow';
 @use './assets/scss/components/article-card';
+@use './assets/scss/components/panel';
 
 // Items
 @include mat.core();

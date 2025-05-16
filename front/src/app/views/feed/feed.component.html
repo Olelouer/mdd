@@ -4,7 +4,8 @@
     <div class="container">
         <div class="page-head-ctn">
             <button mat-button type="submit">Créer un article</button>
-            <a class="feed-sort -link" [class.rotate-arrow]="currentSortOrder === 'desc'" (click)="switchSort()">
+            <a class="feed-sort animated-element -animated-opacity" [class.rotate-arrow]="currentSortOrder === 'desc'"
+                (click)="switchSort()">
                 Trier par
                 <img src="/assets/images/arrow-down.svg" alt="" />
             </a>

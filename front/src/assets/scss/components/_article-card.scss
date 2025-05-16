@@ -6,12 +6,9 @@
     background-color: vars.$primary-bg;
     display: flex;
     border-radius: 8px;
-    transform: translateY(0);
     transition: vars.$basic-transition;
-
-    &:hover {
-        transform: translateY(-5px);
-    }
+    height: 100%;
+    box-sizing: border-box;
 
     .card {
         display: flex;
@@ -38,11 +35,24 @@
         .card-content {
 
             p {
-                height: fn.clamp-calc(64px, 87px);
                 font-size: vars.$x-small-size;
+                line-height: 1.4;
                 margin: 0;
                 overflow: hidden;
-                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 5;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+        }
+    }
+
+    @media (max-width: vars.$mobile) {
+        .card {
+            .card-content {
+                p {
+                    -webkit-line-clamp: 4;
+                }
             }
         }
     }

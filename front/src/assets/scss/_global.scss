@@ -32,20 +32,13 @@ select {
 a {
     cursor: pointer;
     transition: vars.$basic-transition;
+    text-decoration: none;
+    color: vars.$black;
+}
 
-    &.-link {
-        &:hover {
-            opacity: 0.7;
-        }
-    }
-
-    &.-image {
-        transform: scale(1);
-
-        &:hover {
-            transform: scale(1.07);
-        }
-    }
+.current-page {
+    pointer-events: none;
+    color: vars.$highlight;
 }
 
 a,

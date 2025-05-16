@@ -8,14 +8,41 @@
             </a>
             @if(userLogged) {
             <nav>
-                <a class="-small -bold -link -warning-color" (click)="logout()">Se déconnecter</a>
-                <a class="-primary-color -link">Articles</a>
-                <a class="-link">Thèmes</a>
-                <a class="-image">
+                <a class="-small -bold animated-element -animated-opacity -warning-color" (click)="logout()">Se
+                    déconnecter</a>
+                <a class="animated-element -animated-opacity" routerLink="/feed"
+                    routerLinkActive="current-page">Articles</a>
+                <a class="animated-element -animated-opacity">Thèmes</a>
+                <a class="animated-element -animated-scale">
                     <img src="/assets/images/user.svg" alt="Icône utilisateur" />
                 </a>
             </nav>
+            <button class="burger-menu" (click)="openPanel()" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             }
         </div>
     </div>
 </header>
+
+@if(userLogged) {
+<div id="menuPanel">
+    <div class="mobile-panel-overlay" (click)="closePanel()" [class.-open]="isPanelOpen"></div>
+    <div class="menu-panel" [class.-open]="isPanelOpen">
+        <div class="container">
+            <div class="menu-panel-ctn">
+                <nav>
+                    <a class="-small -bold -warning-color" (click)="logout()">Se déconnecter</a>
+                    <a routerLink="/feed" routerLinkActive="current-page">Articles</a>
+                    <a>Thèmes</a>
+                    <a class=" user-link">
+                        <img src="/assets/images/user.svg" alt="Icône utilisateur" />
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+}

@@ -1,0 +1,31 @@
+@use './variables' as vars;
+
+.animated-element {
+    transition: vars.$basic-transition;
+
+    @media (min-width: vars.$mobile) {
+        &.-animated-opacity {
+            opacity: 1;
+
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+
+        &.-animated-up {
+            transform: translateY(0);
+
+            &:hover {
+                transform: translateY(-5px);
+            }
+        }
+
+        &.-animated-scale {
+            transform: scale(1);
+
+            &:hover {
+                transform: scale(1.07);
+            }
+        }
+    }
+}

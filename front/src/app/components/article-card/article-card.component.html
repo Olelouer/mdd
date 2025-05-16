@@ -1,5 +1,5 @@
 @if(article) {
-<a class="article-card">
+<a class="article-card animated-element -animated-up">
     <div class="card">
         <p class="card-title">{{ article.title }}</p>
         <div class="card-meta">
@@ -9,7 +9,7 @@
             }
         </div>
         <div class="card-content">
-            <p>{{ article.content | slice:0:305 }}{{ article.content.length > 305 ? '...' : '' }}</p>
+            <p>{{ article.content }}</p>
         </div>
     </div>
 </a>
