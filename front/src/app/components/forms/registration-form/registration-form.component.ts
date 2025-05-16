@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
-import { RegisterRequest, AuthenticationResponse } from '../../../interfaces/auth.interface';
+import { RegisterRequest } from '../../../interfaces/auth/registerRequest.interface';
+import { AuthenticationResponse } from '../../../interfaces/auth/authenticationResponse.interface';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -23,7 +24,7 @@ export class RegistrationFormComponent {
   onSubmit(): void {
     this.authService.register(this.registrationData).subscribe({
       next: (response: AuthenticationResponse) => {
-        console.log('Success: ' + response);
+        this.router.navigate(['/feed']);
       },
       error: (error: Error) => { console.log(error) }
     });

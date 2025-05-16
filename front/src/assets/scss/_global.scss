@@ -29,6 +29,34 @@ select {
     font-family: vars.$primary-font;
 }
 
+a {
+    cursor: pointer;
+    transition: vars.$basic-transition;
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+a,
+p {
+    &.-warning-color {
+        color: vars.$warning;
+    }
+
+    &.-primary-color {
+        color: vars.$highlight;
+    }
+
+    &.-small {
+        font-size: vars.$x-small-size;
+    }
+
+    &.-bold {
+        font-weight: 700;
+    }
+}
+
 h1 {
     font-size: vars.$large-size;
     font-weight: 700;

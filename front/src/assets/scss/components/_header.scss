@@ -9,4 +9,22 @@
         display: flex;
         width: fn.clamp-calc(92px, 200px);
     }
+
+    .header-ctn {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .home-link {
+            &:hover {
+                opacity: 1;
+            }
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+    }
 }

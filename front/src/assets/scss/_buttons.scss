@@ -2,6 +2,7 @@
 
 button {
     height: 40px !important;
+    width: 156px;
     border-radius: 8px !important;
     transition: vars.$basic-transition;
 
@@ -24,7 +25,6 @@ button {
 button[mat-stroked-button] {
     border-width: 1px;
     border-color: vars.$black;
-    width: 156px;
     font-weight: 600;
 
     .mdc-button__outline {
@@ -54,7 +54,6 @@ button[mat-stroked-button] {
 }
 
 button[mat-button] {
-    width: 156px;
     font-weight: 600;
 
     .mat-mdc-button-touch-target {

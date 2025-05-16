@@ -1,7 +1,21 @@
 <header id="header">
     <div class="container">
-        <div class="img-ctn">
-            <img src="/assets/images/logo-mdd.png" alt="Logo MDD" />
+        <div class="header-ctn">
+            <a class="home-link" (click)="redirectHome()">
+                <div class="img-ctn">
+                    <img src="/assets/images/logo-mdd.png" alt="Logo MDD" />
+                </div>
+            </a>
+            @if(userLogged) {
+            <nav>
+                <a class="-small -bold -warning-color" (click)="logout()">Se déconnecter</a>
+                <a class="-primary-color">Articles</a>
+                <a>Thèmes</a>
+                <a>
+                    <img src="/assets/images/user.svg" alt="Icône utilisateur" />
+                </a>
+            </nav>
+            }
         </div>
     </div>
 </header>

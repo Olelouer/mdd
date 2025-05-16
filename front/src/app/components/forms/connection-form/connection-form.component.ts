@@ -5,7 +5,8 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../../services/auth.service';
-import { AuthenticationRequest, AuthenticationResponse } from '../../../interfaces/auth.interface';
+import { AuthenticationRequest } from '../../../interfaces/auth/authenticationRequest.interface';
+import { AuthenticationResponse } from '../../../interfaces/auth/authenticationResponse.interface';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -47,7 +48,7 @@ export class ConnectionFormComponent {
 
     this.authService.login(requestToSend).subscribe({
       next: (response: AuthenticationResponse) => {
-        //this.router.navigate(['/feed']);
+        this.router.navigate(['/feed']);
       },
       error: (error) => {
         console.error('Échec de la connexion:', error);
