@@ -1,6 +1,6 @@
 @use '../variables' as vars;
 
-#backArrow {
+.back-arrow {
     display: block;
     transition: vars.$basic-transition;
     transform: translateX(0);

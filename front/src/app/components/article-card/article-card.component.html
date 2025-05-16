@@ -1,0 +1,16 @@
+@if(article) {
+<a class="article-card">
+    <div class="card">
+        <p class="card-title">{{ article.title }}</p>
+        <div class="card-meta">
+            <span class="card-date">Le {{ article.createdAt | date:'dd/MM/yyyy' }}</span>
+            @if(article.author) {
+            <span class="card-author">{{ article.author.username }}</span>
+            }
+        </div>
+        <div class="card-content">
+            <p>{{ article.content | slice:0:305 }}{{ article.content.length > 305 ? '...' : '' }}</p>
+        </div>
+    </div>
+</a>
+}

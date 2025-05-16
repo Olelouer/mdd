@@ -2,9 +2,10 @@
 
 button {
     height: 40px !important;
-    width: 156px;
+    width: 153px !important;
     border-radius: 8px !important;
     transition: vars.$basic-transition;
+    padding: 10px !important;
 
     .mat-mdc-button-touch-target {
         border-radius: 8px !important;
@@ -12,8 +13,16 @@ button {
         transition: vars.$basic-transition;
     }
 
+    .mdc-button__label {
+        font-size: vars.$small-size;
+    }
+
     &.-small {
         width: 128px !important;
+    }
+
+    &.-large {
+        width: 166px !important;
     }
 
     &:disabled {
@@ -54,7 +63,7 @@ button[mat-stroked-button] {
 }
 
 button[mat-button] {
-    font-weight: 600;
+    font-weight: 700;
 
     .mat-mdc-button-touch-target {
         background-color: vars.$primary-button-bg;

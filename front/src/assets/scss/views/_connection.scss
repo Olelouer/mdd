@@ -9,11 +9,14 @@
         flex-direction: column;
         gap: 30px;
     }
-}
 
-@media (max-width: vars.$mobile) {
-    #header {
-        display: none;
+    @media (max-width: vars.$mobile) {
+        #header {
+            display: none;
+        }
+
+        #header-panel {
+            display: none;
+        }
     }
-
 }

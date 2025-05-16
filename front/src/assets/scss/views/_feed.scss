@@ -1,1 +1,52 @@
-#feedView {}
+@use '../variables' as vars;
+
+#feedView {
+    .articles-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 40px;
+        row-gap: 20px;
+        margin-top: 30px;
+    }
+
+    .page-head-ctn {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 40px;
+
+        .feed-sort {
+            font-size: vars.$small-size;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            img {
+                transform: rotate(0);
+            }
+
+            &.rotate-arrow {
+                img {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+    }
+
+    @media (max-width: vars.$mobile) {
+        .articles-list {
+            grid-template-columns: repeat(1, 1fr);
+            margin-top: 20px;
+        }
+
+        .page-head-ctn {
+            flex-direction: column;
+            margin-top: 20px;
+
+            .feed-sort {
+                margin-top: 20px;
+            }
+        }
+    }
+}

@@ -1,0 +1,49 @@
+@use '../variables' as vars;
+@use '../mixins' as fn;
+
+.article-card {
+    padding: fn.clamp-calc(10px, 15px) fn.clamp-calc(13px, 18px);
+    background-color: vars.$primary-bg;
+    display: flex;
+    border-radius: 8px;
+    transform: translateY(0);
+    transition: vars.$basic-transition;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        gap: fn.clamp-calc(12px, 20px);
+
+        .card-title {
+            color: vars.$black;
+            font-weight: 700;
+            font-size: vars.$small-size;
+            margin: 0;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+
+            span {
+                font-size: vars.$x-small-size;
+            }
+        }
+
+        .card-content {
+
+            p {
+                height: fn.clamp-calc(64px, 87px);
+                font-size: vars.$x-small-size;
+                margin: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}

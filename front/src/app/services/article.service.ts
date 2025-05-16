@@ -12,8 +12,8 @@ export class ArticleService {
 
   constructor(private http: HttpClient) { }
 
-  getUserFeed(): Observable<Article[]> {
-    const params = new HttpParams().set('sort', 'createdAt,asc');
+  getUserFeed(sortOrder: 'asc' | 'desc' = 'asc'): Observable<Article[]> {
+    const params = new HttpParams().set('sort', `createdAt,${sortOrder}`);
 
     return this.http.get<ArticlesList>(`${this.apiUrl}/feed`, { params }).pipe(
       map(response => {

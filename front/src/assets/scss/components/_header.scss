@@ -15,12 +15,6 @@
         justify-content: space-between;
         align-items: center;
 
-        .home-link {
-            &:hover {
-                opacity: 1;
-            }
-        }
-
         nav {
             display: flex;
             gap: 20px;

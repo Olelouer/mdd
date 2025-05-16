@@ -2,30 +2,32 @@
     <cpn-header></cpn-header>
 
     <div class="container">
-        @if (articles$ | async; as resolvedArticles) {
-        @if (resolvedArticles.length > 0) {
-        <div class="articles-list">
-            @for (article of resolvedArticles; track article.id) {
-            <mat-card class="article-card">
-                <mat-card-header>
-                    <mat-card-title>{{ article.title }}</mat-card-title>
-                    <mat-card-subtitle>
-                        Par {{ article.author?.username || 'Auteur inconnu' }} - Le {{ article.createdAt |
-                        date:'dd/MM/yyyy
-                        HH:mm' }}
-                    </mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <p>{{ article.content | slice:0:200 }}{{ article.content.length > 200 ? '...' : '' }}</p>
-                </mat-card-content>
-            </mat-card>
+        <div class="page-head-ctn">
+            <button mat-button type="submit">Créer un article</button>
+            <a class="feed-sort -link" [class.rotate-arrow]="currentSortOrder === 'desc'" (click)="switchSort()">
+                Trier par
+                <img src="/assets/images/arrow-down.svg" alt="" />
+            </a>
+        </div>
+        @if (isLoading) {
+        <div class="spinner-container">
+            <mat-spinner></mat-spinner>
+        </div>
+        }
+        <div [hidden]="isLoading">
+            @if (articles$ | async; as resolvedArticles) {
+            @if (resolvedArticles.length > 0) {
+            <div class="articles-list">
+                @for (article of resolvedArticles; track article.id) {
+                <cpn-article-card [article]="article"></cpn-article-card>
+                }
+            </div>
+            } @else {
+            <div class="empty-feed">
+                <p>Aucun article à afficher pour le moment.</p>
+            </div>
+            }
             }
         </div>
-        } @else {
-        <div class="empty-feed">
-            <p>Aucun article à afficher pour le moment.</p>
-        </div>
-        }
-        }
     </div>
 </div>
