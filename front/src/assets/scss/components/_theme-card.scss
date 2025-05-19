@@ -1,0 +1,36 @@
+@use '../variables' as vars;
+@use '../mixins' as fn;
+
+.theme-card {
+    padding: fn.clamp-calc(10px, 15px) fn.clamp-calc(13px, 18px);
+    background-color: vars.$primary-bg;
+    border-radius: 8px;
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        gap: fn.clamp-calc(12px, 20px);
+
+        .card-title {
+            color: vars.$black;
+            font-weight: 700;
+            font-size: vars.$small-size;
+            margin: 0;
+        }
+
+        .card-content {
+
+            p {
+                font-size: vars.$x-small-size;
+                margin: 0;
+            }
+        }
+    }
+
+    .card-button {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 12px;
+    }
+}

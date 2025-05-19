@@ -12,7 +12,8 @@
                     déconnecter</a>
                 <a class="animated-element -animated-opacity" routerLink="/feed"
                     routerLinkActive="current-page">Articles</a>
-                <a class="animated-element -animated-opacity">Thèmes</a>
+                <a class="animated-element -animated-opacity" routerLink="/themes"
+                    routerLinkActive="current-page">Thèmes</a>
                 <a class="animated-element -animated-scale">
                     <img src="/assets/images/user.svg" alt="Icône utilisateur" />
                 </a>
@@ -36,7 +37,7 @@
                 <nav>
                     <a class="-small -bold -warning-color" (click)="logout()">Se déconnecter</a>
                     <a routerLink="/feed" routerLinkActive="current-page">Articles</a>
-                    <a>Thèmes</a>
+                    <a routerLink="/themes" routerLinkActive="current-page">Thèmes</a>
                     <a class=" user-link">
                         <img src="/assets/images/user.svg" alt="Icône utilisateur" />
                     </a>

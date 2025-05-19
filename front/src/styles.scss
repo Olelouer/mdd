@@ -12,6 +12,7 @@
 @use './assets/scss/views/registration';
 @use './assets/scss/views/connection';
 @use './assets/scss/views/feed';
+@use './assets/scss/views/themes';
 
 // Components
 @use './assets/scss/components/header';
@@ -20,6 +21,7 @@
 @use './assets/scss/components/back-arrow';
 @use './assets/scss/components/article-card';
 @use './assets/scss/components/panel';
+@use './assets/scss/components/theme-card';
 
 // Items
 @include mat.core();

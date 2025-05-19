@@ -28,7 +28,6 @@ button {
 
         &:disabled {
             cursor: not-allowed;
-            opacity: 0.5;
         }
     }
 
@@ -78,6 +77,12 @@ button[mat-button] {
     .mdc-button__label {
         color: vars.$white;
         transition: vars.$basic-transition;
+    }
+
+    &:disabled {
+        .mat-mdc-button-touch-target {
+            background-color: #939393;
+        }
     }
 
     @media (min-width: vars.$mobile) {

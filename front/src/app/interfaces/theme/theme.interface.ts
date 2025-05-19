@@ -4,4 +4,5 @@ export interface Theme {
     description: string;
     createdAt: string;
     updatedAt: string;
+    subscribed: boolean;
 }

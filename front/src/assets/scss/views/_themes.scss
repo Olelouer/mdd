@@ -1,0 +1,18 @@
+@use '../variables' as vars;
+
+#themesView {
+    .themes-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 10px;
+        row-gap: 20px;
+        margin-top: 30px;
+    }
+
+    @media (max-width: vars.$mobile) {
+        .themes-list {
+            grid-template-columns: repeat(1, 1fr);
+            margin-top: 20px;
+        }
+    }
+}

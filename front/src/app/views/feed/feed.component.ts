@@ -3,23 +3,20 @@ import { CommonModule } from '@angular/common';
 import { finalize, Observable } from 'rxjs';
 import { ArticleService } from '../../services/article.service';
 import { Article } from '../../interfaces/article/article.interface';
-import { MatCardModule } from '@angular/material/card';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatIconModule } from '@angular/material/icon';
 import { Title } from '@angular/platform-browser';
 import { HeaderComponent } from '../../components/header/header.component';
 import { ArticleCardComponent } from '../../components/article-card/article-card.component';
+
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-feed',
   imports: [
     CommonModule,
-    MatCardModule,
-    MatProgressSpinnerModule,
-    MatIconModule,
     HeaderComponent,
     ArticleCardComponent,
+    MatProgressSpinnerModule,
     MatButtonModule
   ],
   templateUrl: './feed.component.html',
