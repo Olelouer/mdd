@@ -28,7 +28,6 @@ export class AuthService {
         return this.http.post<AuthenticationResponse>(`${this.apiUrl}/login`, loginData)
             .pipe(
                 tap(response => {
-                    console.log(response);
                     this.storeToken(response.token);
                 })
             )

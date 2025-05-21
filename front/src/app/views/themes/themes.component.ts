@@ -6,7 +6,7 @@ import { finalize, Observable } from 'rxjs';
 import { Theme } from '../../interfaces/theme/theme.interface';
 
 import { HeaderComponent } from '../../components/header/header.component';
-import { ThemeCardComponent } from '../../components/theme-card/theme-card.component';
+import { ThemeCardComponent } from '../../components/cards/theme-card/theme-card.component';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 

@@ -65,8 +65,6 @@ h1 {
     font-weight: 700;
     position: relative;
 
-
-
     &.-small {
         font-weight: 400;
     }
@@ -78,7 +76,7 @@ img {
 
 // Global container style
 .container {
-    max-width: 1000px;
+    max-width: 840px;
     margin-right: auto;
     margin-left: auto;
     padding: 0 15px;

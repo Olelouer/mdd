@@ -1,5 +1,5 @@
-@use '../variables' as vars;
-@use '../mixins' as fn;
+@use '../../variables' as vars;
+@use '../../mixins' as fn;
 
 .article-card {
     padding: fn.clamp-calc(10px, 15px) fn.clamp-calc(13px, 18px);

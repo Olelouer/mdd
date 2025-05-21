@@ -1,0 +1,13 @@
+#commentForm {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+
+    button {
+        display: flex;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

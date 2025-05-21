@@ -13,15 +13,23 @@
 @use './assets/scss/views/connection';
 @use './assets/scss/views/feed';
 @use './assets/scss/views/themes';
+@use './assets/scss/views/single-article';
 
 // Components
 @use './assets/scss/components/header';
-@use './assets/scss/components/registration-form';
-@use './assets/scss/components/connection-form';
 @use './assets/scss/components/back-arrow';
-@use './assets/scss/components/article-card';
 @use './assets/scss/components/panel';
-@use './assets/scss/components/theme-card';
+
+// Forms
+@use './assets/scss/components/forms/registration-form';
+@use './assets/scss/components/forms/connection-form';
+@use './assets/scss/components/forms/comment-form';
+
+// Cards
+@use './assets/scss/components/cards/theme-card';
+@use './assets/scss/components/cards/article-card';
+@use './assets/scss/components/cards/comment-card';
+
 
 // Items
 @include mat.core();
@@ -41,5 +49,5 @@ html {
 
 html,
 body {
-  height: 100%;
+  padding-bottom: 20px;
 }

@@ -1,0 +1,8 @@
+@if (comment()) {
+<div class="comment-card">
+    <p class="comment-author">{{ comment().author.username }}</p>
+    <div class="comment-content">
+        <p>{{ comment().content }}</p>
+    </div>
+</div>
+}

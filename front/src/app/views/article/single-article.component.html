@@ -1,0 +1,35 @@
+<div id="singleArticleView">
+    <cpn-header></cpn-header>
+    @if(article) {
+    <div class="container">
+        <div class="article-content-ctn">
+            <div class="article">
+                <div class="title-ctn">
+                    <cpn-back-arrow [backRoute]="'/feed'"></cpn-back-arrow>
+                    <h1>{{article.title}}</h1>
+                </div>
+                <div class="article-meta">
+                    <span>Le {{ article.createdAt | date: 'dd/MM/yyyy' }}</span>
+                    <span>{{ article.author.username }}</span>
+                    <span>{{ article.theme.title }}</span>
+                </div>
+                <div class="article-description">
+                    <p>{{ article.content }}</p>
+                </div>
+            </div>
+            <hr class="separator" />
+            <div class="comments">
+                <h2>Commentaires</h2>
+                <div class="comments-ctn">
+                    <div class="comments-list">
+                        @for (comment of article.comments; track comment.id) {
+                        <cpn-comment-card [comment]="comment"></cpn-comment-card>
+                        }
+                    </div>
+                    <cpn-comment-form></cpn-comment-form>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</div>

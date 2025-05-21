@@ -6,6 +6,7 @@ import { FeedComponent } from './views/feed/feed.component';
 import { authGuard } from './guards/auth.guard';
 import { guestGuard } from './guards/guest.guard';
 import { ThemesComponent } from './views/themes/themes.component';
+import { SingleArticleComponent } from './views/article/single-article.component';
 
 
 export const routes: Routes = [
@@ -15,4 +16,5 @@ export const routes: Routes = [
 
     { path: 'feed', component: FeedComponent, canActivate: [authGuard] },
     { path: 'themes', component: ThemesComponent, canActivate: [authGuard] },
+    { path: 'article/:id', component: SingleArticleComponent, canActivate: [authGuard] },
 ];

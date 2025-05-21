@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'cpn-back-arrow',
-  imports: [RouterModule],
+  imports: [RouterLink],
   templateUrl: './back-arrow.component.html'
 })
 export class BackArrowComponent {
-
+  @Input() backRoute: string = '/';
 }

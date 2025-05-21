@@ -1,13 +1,16 @@
-@if(theme) {
+@if(theme()) {
 <div class="theme-card">
     <div class="card">
-        <p class="card-title">{{ theme.title }}</p>
+        <p class="card-title">{{ theme().title }}</p>
         <div class="card-content">
-            <p>{{ theme.description }}</p>
+            <p>
+                {{ theme().description.length > 132 ? (theme().description | slice:0:132) + '...' : theme().description
+                }}
+            </p>
         </div>
     </div>
     <div class="card-button">
-        @if (theme.subscribed) {
+        @if (isSubscribed()) {
         <button mat-button type="submit" disabled>Déjà abonné</button>
         } @else {
         <button mat-button type="submit" (click)="subscribe()">S'abonner</button>

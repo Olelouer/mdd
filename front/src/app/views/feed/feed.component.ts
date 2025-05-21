@@ -5,7 +5,7 @@ import { ArticleService } from '../../services/article.service';
 import { Article } from '../../interfaces/article/article.interface';
 import { Title } from '@angular/platform-browser';
 import { HeaderComponent } from '../../components/header/header.component';
-import { ArticleCardComponent } from '../../components/article-card/article-card.component';
+import { ArticleCardComponent } from '../../components/cards/article-card/article-card.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -26,8 +26,10 @@ export class FeedComponent {
   public currentSortOrder: 'asc' | 'desc' = 'asc';
   public isLoading: boolean = false;
 
-  constructor(private articleService: ArticleService, private titleService: Title) {
-  }
+  constructor(
+    private articleService: ArticleService,
+    private titleService: Title
+  ) { }
 
   ngOnInit(): void {
     this.titleService.setTitle("Fil d'actualité - MDD")

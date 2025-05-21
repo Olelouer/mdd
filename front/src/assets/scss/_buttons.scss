@@ -1,6 +1,9 @@
 @use './variables' as vars;
 
 button {
+    background-color: transparent;
+    border: none;
+
     &.mdc-button {
         height: 40px;
         width: 153px;

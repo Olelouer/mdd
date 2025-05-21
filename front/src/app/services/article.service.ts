@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ArticlesList } from '../interfaces/article/articlesList.interface';
 import { Article } from '../interfaces/article/article.interface';
 
@@ -19,12 +19,10 @@ export class ArticleService {
       map(response => {
         return response.articles;
       }),
-      catchError(this.handleError)
     )
   }
 
-  private handleError(error: any): Observable<never> {
-    console.error('Une erreur est survenue dans ArticleService:', error);
-    return throwError(() => new Error('Erreur lors de la récupération des articles. Veuillez réessayer.'));
+  getArticle(articleId: string): Observable<Article> {
+    return this.http.get<Article>(`${this.apiUrl}/${articleId}`);
   }
 }

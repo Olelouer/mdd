@@ -27,5 +27,13 @@
                 transform: scale(1.07);
             }
         }
+
+        &.-animated-top-right {
+            transform: translate3d(0, 0, 0);
+
+            &:hover {
+                transform: translate3d(5px, -5px, 0);
+            }
+        }
     }
 }

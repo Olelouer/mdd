@@ -10,6 +10,21 @@ label {
     font-size: vars.$small-size;
 }
 
+textarea {
+    border: 1px solid vars.$black;
+    font-size: vars.$medium-size;
+    font-family: vars.$primary-font;
+    border-radius: 16px;
+    min-height: 120px;
+    flex-grow: 1;
+    resize: none;
+    padding: 15px;
+
+    &::placeholder {
+        color: vars.$placeholder;
+    }
+}
+
 .main-input input {
     height: 50px;
     width: 250px;

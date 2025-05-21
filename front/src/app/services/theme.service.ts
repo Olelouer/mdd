@@ -19,4 +19,12 @@ export class ThemeService {
       })
     )
   }
+
+  subscribeCurrentUser(themeId: number): Observable<Object> {
+    return this.http.post(`${this.apiUrl}/${themeId}/subscribe`, null);
+  }
+
+  unsubscribeCurrentUser(themeId: number): Observable<Object> {
+    return this.http.delete(`${this.apiUrl}/${themeId}/unsubscribe`);
+  }
 }
