@@ -35,5 +35,13 @@
                 transform: translate3d(5px, -5px, 0);
             }
         }
+
+        &.-animated-left {
+            transform: translateX(0);
+
+            &:hover {
+                transform: translateX(-5px);
+            }
+        }
     }
 }

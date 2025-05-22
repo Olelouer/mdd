@@ -38,7 +38,7 @@ public class AuthService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
-    }
+    } 
 
     /**
      * Authenticates a user by verifying credentials and generating a JWT token.

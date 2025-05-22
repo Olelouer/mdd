@@ -19,6 +19,7 @@ textarea {
     flex-grow: 1;
     resize: none;
     padding: 15px;
+    min-width: 0;
 
     &::placeholder {
         color: vars.$placeholder;

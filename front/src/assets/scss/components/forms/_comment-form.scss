@@ -1,13 +1,30 @@
+@use '../../mixins' as fn;
+
 #commentForm {
     display: flex;
     align-items: center;
-    gap: 40px;
+    max-width: 100%;
+    gap: fn.clamp-calc(10px, 40px);
+
+    button,
+    img {
+        min-width: 43px;
+        min-height: 43px;
+        width: 43px;
+        height: 43px;
+        object-fit: contain;
+    }
 
     button {
         display: flex;
 
         &:hover {
             cursor: pointer;
+        }
+
+        &:disabled {
+            opacity: 0.7;
+            pointer-events: none;
         }
     }
 }

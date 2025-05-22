@@ -1,7 +1,9 @@
-<form id="commentForm">
-    <textarea placeholder="Écrivez ici votre commentaire"></textarea>
+<form id="commentForm" (ngSubmit)="onSubmit()">
+    <textarea placeholder="Écrivez ici votre commentaire" id="commentContent" name="commentContent"
+        [(ngModel)]="commentFormData.commentContent" required></textarea>
     <div class="button-ctn">
-        <button class="animated-element -animated-top-right" type="submit">
+        <button [disabled]="!commentFormData.commentContent.trim()" class="animated-element -animated-top-right"
+            type="submit">
             <img src="/assets/images/send.svg" />
         </button>
     </div>

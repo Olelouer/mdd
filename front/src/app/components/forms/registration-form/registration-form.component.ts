@@ -35,7 +35,7 @@ export class RegistrationFormComponent {
         next: (response: AuthenticationResponse) => {
           this.router.navigate(['/feed']);
         },
-        error: (error: Error) => { console.log(error) }
+        error: (error: Error) => { console.error(error) }
       });
 
   }

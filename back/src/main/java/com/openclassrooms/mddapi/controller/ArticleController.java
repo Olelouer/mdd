@@ -28,8 +28,11 @@ public class ArticleController {
      * @return a ResponseEntity containing a GlobalMessageResponse indicating the result of the operation
      */
     @PostMapping
-    public ResponseEntity<GlobalMessageResponse> createArticle(@Valid @RequestBody ArticleRequest articleRequest) {
-        return ResponseEntity.ok(articleService.createArticle(articleRequest));
+    public ResponseEntity<GlobalMessageResponse> createArticle(
+            @AuthenticationPrincipal User currentUser,
+            @Valid @RequestBody ArticleRequest articleRequest
+    ) {
+        return ResponseEntity.ok(articleService.createArticle(articleRequest, currentUser));
     }
 
     /**

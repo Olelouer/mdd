@@ -40,16 +40,16 @@ public class ArticleService {
      *
      * @return a GlobalMessageResponse indicating the result of the operation
      */
-    public GlobalMessageResponse createArticle(ArticleRequest articleRequest) {
+    public GlobalMessageResponse createArticle(ArticleRequest articleRequest, User currentUser) {
         try {
-            User user = userRepository.findById(articleRequest.getUserId())
-                    .orElseThrow(() -> new EntityNotFoundException("User not found : " + articleRequest.getUserId()));
+            User author = userRepository.findById(currentUser.getId())
+                    .orElseThrow(() -> new EntityNotFoundException("User not found : " + currentUser.getId()));
 
             Theme theme = themeRepository.findById(articleRequest.getThemeId())
                     .orElseThrow(() -> new EntityNotFoundException("Article not found with id: " + articleRequest.getThemeId()));
 
             Article article = articleMapper.toEntity(articleRequest);
-            article.setAuthor(user);
+            article.setAuthor(author);
             article.setTheme(theme);
             articleRepository.save(article);
 
@@ -96,8 +96,8 @@ public class ArticleService {
         }
 
         if (!subscribedThemeIds.isEmpty()) {
-            List<Article> articles = articleRepository.findByThemeIdIn(subscribedThemeIds, pageable); // Using derived query name
-            feedArticleDTOs = articleMapper.toResponseList(articles); // Assign the result here
+            List<Article> articles = articleRepository.findByThemeIdIn(subscribedThemeIds, pageable);
+            feedArticleDTOs = articleMapper.toResponseList(articles);
         }
 
         return new ArticleListResponse(feedArticleDTOs);

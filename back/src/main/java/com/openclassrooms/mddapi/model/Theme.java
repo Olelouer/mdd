@@ -33,7 +33,7 @@ public class Theme {
 
     @NotBlank(message = "Description cannot be empty")
     @NotNull(message = "Description cannot be null")
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
     @OneToMany(mappedBy = "theme", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

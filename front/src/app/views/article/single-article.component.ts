@@ -5,6 +5,7 @@ import { ArticleService } from '../../services/article.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Article } from '../../interfaces/article/article.interface';
 import { Title } from '@angular/platform-browser';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { HeaderComponent } from '../../components/header/header.component';
 import { BackArrowComponent } from '../../components/back-arrow/back-arrow.component';
@@ -19,12 +20,14 @@ import { CommentFormComponent } from '../../components/forms/comment-form/commen
     HeaderComponent,
     BackArrowComponent,
     CommentCardComponent,
+    MatProgressSpinnerModule
   ],
   templateUrl: './single-article.component.html'
 })
 export class SingleArticleComponent {
   public article!: Article;
   public isLoading: boolean = true;
+  public articleId!: string;
 
   constructor(
     private articleService: ArticleService,
@@ -34,9 +37,15 @@ export class SingleArticleComponent {
   ) { }
 
   ngOnInit(): void {
-    const articleId = this.route.snapshot.paramMap.get('id');
+    const routeID = this.route.snapshot.paramMap.get('id');
 
-    if (articleId) this.loadArticle(articleId);
+    if (routeID !== null) {
+      this.articleId = routeID;
+      this.loadArticle(this.articleId);
+    } else {
+      console.error("ID de l'article non présent dans l'URL.");
+      this.isLoading = false;
+    }
   }
 
   loadArticle(articleId: string) {
@@ -56,5 +65,11 @@ export class SingleArticleComponent {
           this.isLoading = false;
         }
       })
+  }
+
+  handleNewCommentPosted(): void {
+    if (this.articleId) {
+      this.loadArticle(this.articleId);
+    }
   }
 }

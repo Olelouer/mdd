@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Theme } from '../interfaces/theme/theme.interface';
 import { ThemesList } from '../interfaces/theme/themesList.interface';
+import { GlobalMessageResponse } from '../interfaces/globalMessageResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +21,11 @@ export class ThemeService {
     )
   }
 
-  subscribeCurrentUser(themeId: number): Observable<Object> {
-    return this.http.post(`${this.apiUrl}/${themeId}/subscribe`, null);
+  subscribeCurrentUser(themeId: number): Observable<GlobalMessageResponse> {
+    return this.http.post<GlobalMessageResponse>(`${this.apiUrl}/${themeId}/subscribe`, null);
   }
 
-  unsubscribeCurrentUser(themeId: number): Observable<Object> {
-    return this.http.delete(`${this.apiUrl}/${themeId}/unsubscribe`);
+  unsubscribeCurrentUser(themeId: number): Observable<GlobalMessageResponse> {
+    return this.http.delete<GlobalMessageResponse>(`${this.apiUrl}/${themeId}/unsubscribe`);
   }
 }

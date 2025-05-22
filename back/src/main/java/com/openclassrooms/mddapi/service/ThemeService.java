@@ -64,9 +64,8 @@ public class ThemeService {
 
     /**
      * Retrieves themes to which the given user is subscribed.
-     * This method now uses the toResponseList from ThemeMapper.
      *
-     * @param currentUser The user for whom to retrieve subscribed themes.
+     * @param currentUser Currently authenticated user
      * @return A ThemeListResponse containing the list of subscribed themes as ThemeResponse DTOs.
      */
     @Transactional(readOnly = true)

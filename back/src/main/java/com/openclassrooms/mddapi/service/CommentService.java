@@ -29,16 +29,16 @@ public class CommentService {
      * @param commentRequest the request containing the comment's details
      * @return GlobaleMessageResponse
      */
-    public GlobalMessageResponse createComment(CommentRequest commentRequest) {
+    public GlobalMessageResponse createComment(CommentRequest commentRequest, User currentUser) {
         try {
-            User user = userRepository.findById(commentRequest.getUserId())
-                    .orElseThrow(() -> new EntityNotFoundException("User not found : " + commentRequest.getUserId()));
+            User author = userRepository.findById(currentUser.getId())
+                    .orElseThrow(() -> new EntityNotFoundException("User not found : " + currentUser.getId()));
 
             Article article = articleRepository.findById(commentRequest.getArticleId())
                     .orElseThrow(() -> new EntityNotFoundException("Article not found with id: " + commentRequest.getArticleId()));
 
             Comment comment = commentMapper.toEntity(commentRequest);
-            comment.setAuthor(user);
+            comment.setAuthor(author);
             comment.setArticle(article);
             commentRepository.save(comment);
 

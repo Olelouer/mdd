@@ -5,14 +5,30 @@
     display: flex;
     gap: 50px;
 
+    p {
+        margin: 0;
+    }
+
     .comment-content {
         padding: 20px;
         background-color: vars.$primary-bg;
         border-radius: 16px;
         flex-grow: 1;
+        min-height: 100px;
+        max-width: 450px;
+    }
 
-        p {
-            margin: 0;
+    @media(max-width: vars.$mobile) {
+        flex-direction: column;
+        gap: 10px;
+
+        .comment-author {
+            text-align: right;
+        }
+
+        .comment-content {
+            padding: 20px 10px;
+            min-height: 92px;
         }
     }
 }
