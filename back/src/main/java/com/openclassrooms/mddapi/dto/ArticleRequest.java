@@ -23,15 +23,6 @@ public class ArticleRequest {
     @NotNull(message = "Content cannot be null")
     private String content;
 
-    @JsonProperty("created_at")
-    private LocalDateTime createdAt;
-
-    @JsonProperty("updated_at")
-    private LocalDateTime updatedAt;
-
-    @NotNull(message = "User ID is required")
-    private Long userId;
-
     @NotNull(message = "Theme ID is required")
     private Long themeId;
 }

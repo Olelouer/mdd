@@ -13,5 +13,4 @@ import java.util.List;
 @NoArgsConstructor
 public class CommentListResponse {
     private List<CommentResponse> comments;
-
 }
