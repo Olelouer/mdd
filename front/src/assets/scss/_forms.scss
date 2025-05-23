@@ -55,6 +55,17 @@ textarea {
     }
 }
 
+.global-error {
+    width: 250px;
+}
+
+.global-message-response {
+    p {
+        text-align: center;
+        font-size: vars.$small-size;
+    }
+}
+
 .input-error {
     font-size: vars.$x-small-size;
     color: vars.$warning;
@@ -86,7 +97,13 @@ mat-form-field {
 }
 
 @media (max-width: 300px) {
-    .main-input input {
+    .main-input {
+        input {
+            width: 100%;
+        }
+    }
+
+    .global-error {
         width: 100%;
     }
 }

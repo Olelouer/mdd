@@ -1,1 +1,41 @@
-<p>user-form works!</p>
+<form id="userForm" (ngSubmit)="userForm.form.valid && onSubmit()" #userForm="ngForm">
+    <mat-form-field appearance="outline" class="form-field-small">
+        <input matInput [(ngModel)]="userData.username" name="username" #title="ngModel"
+            placeholder="Nom d'utilisateur">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field-small">
+        <input type="email" matInput [(ngModel)]="userData.email" name="email" #email="ngModel"
+            placeholder="Adresse email" email />
+        @if (email.invalid && (email.touched || userForm.submitted)) {
+        <mat-error>
+            @if (email.errors?.['required']) {
+            Le contenu est requis.
+            }
+            @if (email.errors?.['email']) {
+            Adresse email valide.
+            }
+        </mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field-small">
+        <input type="password" matInput [(ngModel)]="userData.password" name="password" #password="ngModel"
+            placeholder="Mot de passe">
+        @if (password.invalid && (password.touched || userForm.submitted)) {
+        <mat-error>
+            @if (password.errors?.['required']) {
+            Veuillez entrer votre mot de passe
+            }
+        </mat-error>
+        }
+    </mat-form-field>
+
+    @if (globalMessageResponse) {
+    <div class="global-message-response">
+        <p>{{ globalMessageResponse }}</p>
+    </div>
+    }
+
+    <button class="-medium" mat-button type="submit">Sauvegarder</button>
+</form>

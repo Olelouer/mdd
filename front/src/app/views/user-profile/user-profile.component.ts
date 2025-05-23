@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 
 import { HeaderComponent } from '../../components/header/header.component';
 import { ThemeCardComponent } from '../../components/cards/theme-card/theme-card.component';
+import { UserFormComponent } from '../../components/forms/user-form/user-form.component';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -16,6 +17,7 @@ import { Theme } from '../../interfaces/theme/theme.interface';
   imports: [
     HeaderComponent,
     ThemeCardComponent,
+    UserFormComponent,
     MatProgressSpinnerModule
   ],
   templateUrl: './user-profile.component.html',

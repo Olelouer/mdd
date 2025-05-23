@@ -1,9 +1,11 @@
 @use '../variables' as vars;
+@use '../mixins' as fn;
 
 #userProfileView {
     .user-ctn {
         h1 {
             text-align: center;
+            margin-top: fn.clamp-calc(30px, 50px);
         }
     }
 

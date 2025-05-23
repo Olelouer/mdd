@@ -52,12 +52,14 @@
                 }
             </mat-form-field>
 
-            <button mat-button type="submit" [disabled]="!articleForm.form.valid">Créer</button>
+            @if (globalMessageResponse) {
+            <div class="global-message-response">
+                <p>{{ globalMessageResponse }}</p>
+            </div>
+            }
+
+            <button class="-medium" mat-button type="submit" [disabled]="!articleForm.form.valid">Créer</button>
         </form>
-        @if (globalMessageResponse) {
-        <div class="global-message-response">
-            <p>{{ globalMessageResponse }}</p>
-        </div>
-        }
+
     </div>
 </div>

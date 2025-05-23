@@ -1,4 +1,5 @@
 @use '../mixins' as fn;
+@use '../variables' as vars;
 
 #createArticleView {
     .title-arrow-ctn {
@@ -13,12 +14,6 @@
 
         button {
             margin-top: fn.clamp-calc(25px, 35px);
-        }
-    }
-
-    .global-message-response {
-        p {
-            text-align: center;
         }
     }
 }
