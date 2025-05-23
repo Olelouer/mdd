@@ -1,0 +1,23 @@
+<div id="userProfileView">
+    <cpn-header></cpn-header>
+    <div class="container">
+        <div class="user-ctn">
+            <h1>Profil utilisateur</h1>
+        </div>
+        <hr class="separator" />
+        <div class="themes-ctn">
+            <h2>Abonnements</h2>
+            @if(isLoading) {<div class="spinner-container">
+                <mat-spinner></mat-spinner>
+            </div>
+            } @else {
+            <div class="themes-list">
+                @for (theme of themes; track theme.id) {
+                <cpn-theme-card [theme]="theme" [forUnsubscribe]="true"
+                    (subscriptionChanged)="onThemeSubscriptionChange($event)"></cpn-theme-card>
+                }
+            </div>
+            }
+        </div>
+    </div>
+</div>

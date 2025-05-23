@@ -5,6 +5,11 @@
     padding: fn.clamp-calc(10px, 15px) fn.clamp-calc(13px, 18px);
     background-color: vars.$primary-bg;
     border-radius: 8px;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     .card {
         display: flex;

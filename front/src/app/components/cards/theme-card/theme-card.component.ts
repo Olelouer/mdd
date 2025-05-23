@@ -1,10 +1,11 @@
-import { Component, DestroyRef, effect, input, signal } from '@angular/core';
+import { Component, DestroyRef, effect, EventEmitter, input, Output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Theme } from '../../../interfaces/theme/theme.interface';
 import { ThemeService } from '../../../services/theme.service';
 
 import { MatButtonModule } from '@angular/material/button';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { GlobalMessageResponse } from '../../../interfaces/globalMessageResponse.interface';
 
 @Component({
   selector: 'cpn-theme-card',
@@ -16,8 +17,11 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class ThemeCardComponent {
   theme = input.required<Theme>();
+  forUnsubscribe = input<boolean>(false);
 
   isSubscribed = signal(false);
+
+  @Output() subscriptionChanged = new EventEmitter<{ themeId: number, subscribed: boolean }>();
 
   constructor(private themeService: ThemeService, private destroyRef: DestroyRef) {
     effect(() => {
@@ -32,7 +36,7 @@ export class ThemeCardComponent {
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe({
-        next: () => {
+        next: (response: GlobalMessageResponse) => {
           this.isSubscribed.set(true);
         }
       });
@@ -45,8 +49,9 @@ export class ThemeCardComponent {
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe({
-        next: () => {
+        next: (response: GlobalMessageResponse) => {
           this.isSubscribed.set(false);
+          this.subscriptionChanged.emit({ themeId: currentTheme.id, subscribed: false });
         }
       });
   }

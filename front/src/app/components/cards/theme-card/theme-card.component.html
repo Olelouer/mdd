@@ -10,7 +10,9 @@
         </div>
     </div>
     <div class="card-button">
-        @if (isSubscribed()) {
+        @if (forUnsubscribe()) {
+        <button mat-button type="submit" (click)="unsubscribe()">Se désabonner</button>
+        } @else if (isSubscribed()) {
         <button mat-button type="submit" disabled>Déjà abonné</button>
         } @else {
         <button mat-button type="submit" (click)="subscribe()">S'abonner</button>

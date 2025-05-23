@@ -12,6 +12,13 @@ export class HeaderComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
   isPanelOpen: boolean = false;
+  isUserProfileActive = false;
+
+  ngOnInit(): void {
+    if (this.router.url === '/user-profile') {
+      this.isUserProfileActive = true;
+    }
+  }
 
   get userLogged(): boolean {
     return this.authService.isLoggedIn();
@@ -19,14 +26,14 @@ export class HeaderComponent {
 
   logout() {
     this.authService.logout();
-    this.router.navigate([""]);
+    this.router.navigate(["/"]);
   }
 
   redirectHome() {
     if (this.userLogged) {
       this.router.navigate(["/feed"]);
     } else {
-      this.router.navigate([""]);
+      this.router.navigate(["/"]);
     }
   }
 

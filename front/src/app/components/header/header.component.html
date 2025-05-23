@@ -14,8 +14,12 @@
                     routerLinkActive="current-page">Articles</a>
                 <a class="animated-element -animated-opacity" routerLink="/themes"
                     routerLinkActive="current-page">Thèmes</a>
-                <a class="animated-element -animated-scale">
+                <a class="animated-element -animated-scale" routerLink="/user-profile" routerLinkActive="current-page">
+                    @if (isUserProfileActive) {
+                    <img src="/assets/images/user-active.svg" alt="Icône utilisateur active" />
+                    } @else {
                     <img src="/assets/images/user.svg" alt="Icône utilisateur" />
+                    }
                 </a>
             </nav>
             <button class="burger-menu" (click)="openPanel()" aria-label="Menu">
@@ -38,8 +42,12 @@
                     <a class="-small -bold -warning-color" (click)="logout()">Se déconnecter</a>
                     <a routerLink="/feed" routerLinkActive="current-page">Articles</a>
                     <a routerLink="/themes" routerLinkActive="current-page">Thèmes</a>
-                    <a class=" user-link">
+                    <a class="user-link" routerLink="/user-profile" routerLinkActive="current-page">
+                        @if (isUserProfileActive) {
+                        <img src="/assets/images/user-active.svg" alt="Icône utilisateur active" />
+                        } @else {
                         <img src="/assets/images/user.svg" alt="Icône utilisateur" />
+                        }
                     </a>
                 </nav>
             </div>

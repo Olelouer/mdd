@@ -21,6 +21,14 @@ export class ThemeService {
     )
   }
 
+  getSubscribedThemes(): Observable<Theme[]> {
+    return this.http.get<ThemesList>(`${this.apiUrl}/subscribed`).pipe(
+      map(response => {
+        return response.themes;
+      })
+    )
+  }
+
   getAllThemes(): Observable<Theme[]> {
     return this.http.get<ThemesList>(`${this.apiUrl}`).pipe(
       map(response => {

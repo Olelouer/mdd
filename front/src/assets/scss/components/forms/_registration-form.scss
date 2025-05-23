@@ -4,4 +4,8 @@
     align-items: center;
     flex-direction: column;
     gap: 20px;
+
+    .global-error {
+        max-width: 200px;
+    }
 }

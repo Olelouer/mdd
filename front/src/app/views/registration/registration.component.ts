@@ -15,6 +15,6 @@ export class RegistrationComponent {
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle("Connexion - MDD")
+    this.titleService.setTitle("Inscription - MDD")
   }
 }

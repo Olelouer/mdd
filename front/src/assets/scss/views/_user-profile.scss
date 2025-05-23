@@ -1,0 +1,42 @@
+@use '../variables' as vars;
+
+#userProfileView {
+    .user-ctn {
+        h1 {
+            text-align: center;
+        }
+    }
+
+    .separator {
+        margin: 25px 40px;
+    }
+
+    .themes-ctn {
+        h2 {
+            text-align: center;
+            font-size: vars.$large-size;
+            margin: 0;
+        }
+
+        .themes-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 10px;
+            row-gap: 20px;
+            margin-top: 15px;
+        }
+    }
+
+    @media (max-width: vars.$mobile) {
+        .separator {
+            margin: 25px 0;
+        }
+
+        .themes-ctn {
+            .themes-list {
+                grid-template-columns: repeat(1, 1fr);
+                margin-top: 20px;
+            }
+        }
+    }
+}

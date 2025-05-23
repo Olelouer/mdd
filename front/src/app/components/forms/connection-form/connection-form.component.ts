@@ -57,7 +57,7 @@ export class ConnectionFormComponent {
           this.router.navigate(['/feed']);
         },
         error: (error) => {
-          console.error('Échec de la connexion:', error);
+          this.errorMessage = 'Identifiant ou mot de passe incorrect';
           this.formData.password = '';
         }
       });

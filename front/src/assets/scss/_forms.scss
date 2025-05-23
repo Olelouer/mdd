@@ -34,20 +34,24 @@ textarea {
     width: fn.clamp-calc(250px, 281px, 300px, 768px);
 }
 
-.main-input input {
-    height: 50px;
-    width: 250px;
-    border: 1px solid vars.$black;
-    border-radius: 8px;
-    padding: 0 10px;
-    font-size: vars.$medium-size;
-    display: flex;
-    box-sizing: border-box;
 
-    &.is-invalid {
-        outline-color: vars.$warning;
-        outline-style: solid;
-        outline-width: 2px;
+
+.main-input {
+    input {
+        height: 50px;
+        width: 250px;
+        border: 1px solid vars.$black;
+        border-radius: 8px;
+        padding: 0 10px;
+        font-size: vars.$medium-size;
+        display: flex;
+        box-sizing: border-box;
+
+        &.is-invalid {
+            outline-color: vars.$warning;
+            outline-style: solid;
+            outline-width: 2px;
+        }
     }
 }
 

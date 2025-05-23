@@ -20,6 +20,9 @@ export class RegistrationFormComponent {
     password: ''
   }
 
+  errorMessage: string | null = null;
+
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -27,6 +30,7 @@ export class RegistrationFormComponent {
   ) { }
 
   onSubmit(): void {
+    this.errorMessage = null;
     this.authService.register(this.registrationData)
       .pipe(
         takeUntilDestroyed(this.destroyRef)
@@ -35,7 +39,10 @@ export class RegistrationFormComponent {
         next: (response: AuthenticationResponse) => {
           this.router.navigate(['/feed']);
         },
-        error: (error: Error) => { console.error(error) }
+        error: (error: Array<string>) => {
+          this.errorMessage = 'Le mot de passe doit contenir un minimum de 8 caractères dont 1 majuscule, 1 caractère spécial et 1 nombre.';
+          this.registrationData.password = '';
+        }
       });
 
   }

@@ -9,6 +9,7 @@ import { ThemesComponent } from './views/themes/themes.component';
 import { SingleArticleComponent } from './views/article/single-article.component';
 import { CreateArticleComponent } from './views/create-article/create-article.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
+import { UserProfileComponent } from './views/user-profile/user-profile.component';
 
 
 export const routes: Routes = [
@@ -20,6 +21,7 @@ export const routes: Routes = [
     { path: 'themes', component: ThemesComponent, canActivate: [authGuard] },
     { path: 'create-article', component: CreateArticleComponent, canActivate: [authGuard] },
     { path: 'article/:id', component: SingleArticleComponent, canActivate: [authGuard] },
+    { path: 'user-profile', component: UserProfileComponent, canActivate: [authGuard] },
 
     { path: '**', component: NotFoundComponent },
 ];

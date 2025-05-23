@@ -37,8 +37,8 @@
     <div class="main-input">
         <label for="password">Mot de passe</label>
         <input type="password" id="password" name="password" [(ngModel)]="registrationData.password" #password="ngModel"
-            required minlength="8" [ngClass]="{ 'is-invalid': registrationForm.submitted && password.invalid }">
-
+            required minlength="8" aria-describedby="passwordHelp"
+            [ngClass]="{ 'is-invalid': registrationForm.submitted && password.invalid }">
         @if (registrationForm.submitted && password.invalid) {
         <div class="invalid-feedback">
             @if (password.errors?.['required']) {
@@ -47,12 +47,15 @@
             @if (password.errors?.['minlength']) {
             <span class="input-error">Doit contenir au moins 8 caractères.</span>
             }
-            @if (password.errors?.['pattern']) {
-            <span class="input-error">Doit contenir majuscule, minuscule, chiffre et caractère spécial.</span>
-            }
         </div>
         }
     </div>
+
+    @if (errorMessage) {
+    <div class="input-error global-error">
+        {{ errorMessage }}
+    </div>
+    }
 
     <button class="-small" mat-button type="submit" [disabled]="!registrationForm.form.valid">S'inscrire</button>
 </form>
