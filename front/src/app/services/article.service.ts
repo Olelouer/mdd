@@ -3,6 +3,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { ArticlesList } from '../interfaces/article/articlesList.interface';
 import { Article } from '../interfaces/article/article.interface';
+import { ArticleResquest } from '../interfaces/article/articleRequest.interface';
+import { GlobalMessageResponse } from '../interfaces/globalMessageResponse.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +22,10 @@ export class ArticleService {
         return response.articles;
       }),
     )
+  }
+
+  postArticle(payload: ArticleResquest): Observable<GlobalMessageResponse> {
+    return this.http.post<GlobalMessageResponse>(`${this.apiUrl}`, payload);
   }
 
   getArticle(articleId: string): Observable<Article> {

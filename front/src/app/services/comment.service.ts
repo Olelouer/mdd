@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GlobalMessageResponse } from '../interfaces/globalMessageResponse.interface';
+import { CommentResquest } from '../interfaces/comment/commentRequest.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class CommentService {
 
   constructor(private http: HttpClient) { }
 
-  postComment(payload: { content: string, articleId: string }): Observable<GlobalMessageResponse> {
+  postComment(payload: CommentResquest): Observable<GlobalMessageResponse> {
     return this.http.post<GlobalMessageResponse>(`${this.apiUrl}`, payload);
   }
 }

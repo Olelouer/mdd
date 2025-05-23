@@ -14,6 +14,8 @@
 @use './assets/scss/views/feed';
 @use './assets/scss/views/themes';
 @use './assets/scss/views/single-article';
+@use './assets/scss/views/create-article';
+@use './assets/scss/views/not-found';
 
 // Components
 @use './assets/scss/components/header';
@@ -45,6 +47,11 @@ html {
 
 :root {
   --mat-sys-primary: #7763C5;
+  --mat-sys-body-large-size: vars.$medium-size;
+  --mat-sys-body-large-font: vars.$primary-font;
+  --mdc-outlined-text-field-outline-color: #7763C5;
+  --mat-sys-outline: 2px;
+  --mdc-outlined-text-field-outline-width: 2px;
 }
 
 html,

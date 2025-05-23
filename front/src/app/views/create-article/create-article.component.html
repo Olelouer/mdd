@@ -1,0 +1,63 @@
+<div id="createArticleView">
+    <cpn-header></cpn-header>
+    <div class="container">
+        <div class="title-arrow-ctn">
+            <cpn-back-arrow [backRoute]="'/feed'"></cpn-back-arrow>
+            <h1>Créer un nouvel article</h1>
+        </div>
+        <form class="create-article-form" (ngSubmit)="articleForm.form.valid && onSubmit()" id="articleForm"
+            #articleForm="ngForm">
+            @if (themes) {
+            <mat-form-field appearance="outline" class="form-field-small">
+                <mat-label>Sélectionner un thème</mat-label>
+                <mat-select required [(ngModel)]="articleData.themeId" name="themeId" #themeId="ngModel">
+                    @for (theme of themes; track theme.id) {
+                    <mat-option [value]="theme.id.toString()">
+                        {{theme.title}}
+                    </mat-option>
+                    }
+                </mat-select>
+                @if (themeId.invalid && (themeId.touched || articleForm.submitted)) {
+                <mat-error>
+                    @if (themeId.errors?.['required']) {
+                    Le thème est requis.
+                    }
+                </mat-error>
+                }
+            </mat-form-field>
+            }
+
+            <mat-form-field appearance="outline" class="form-field-small">
+                <mat-label>Titre de l'article</mat-label>
+                <input matInput required [(ngModel)]="articleData.title" name="title " #title="ngModel">
+                @if (title.invalid && (title.touched || articleForm.submitted)) {
+                <mat-error>
+                    @if (title.errors?.['required']) {
+                    Le titre est requis.
+                    }
+                </mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field-small">
+                <mat-label for="content">Contenu de l'article</mat-label>
+                <textarea matInput required [(ngModel)]="articleData.content" name="content"
+                    #content="ngModel"></textarea>
+                @if (content.invalid && (content.touched || articleForm.submitted)) {
+                <mat-error>
+                    @if (content.errors?.['required']) {
+                    Le contenu est requis.
+                    }
+                </mat-error>
+                }
+            </mat-form-field>
+
+            <button mat-button type="submit" [disabled]="!articleForm.form.valid">Créer</button>
+        </form>
+        @if (globalMessageResponse) {
+        <div class="global-message-response">
+            <p>{{ globalMessageResponse }}</p>
+        </div>
+        }
+    </div>
+</div>

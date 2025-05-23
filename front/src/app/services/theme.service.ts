@@ -21,6 +21,14 @@ export class ThemeService {
     )
   }
 
+  getAllThemes(): Observable<Theme[]> {
+    return this.http.get<ThemesList>(`${this.apiUrl}`).pipe(
+      map(response => {
+        return response.themes;
+      })
+    );
+  }
+
   subscribeCurrentUser(themeId: number): Observable<GlobalMessageResponse> {
     return this.http.post<GlobalMessageResponse>(`${this.apiUrl}/${themeId}/subscribe`, null);
   }

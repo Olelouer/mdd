@@ -1,4 +1,4 @@
-<form id="commentForm" (ngSubmit)="onSubmit()">
+<form id="commentForm" (ngSubmit)="commentForm.form.valid && onSubmit()" #commentForm="ngForm">
     <textarea placeholder="Écrivez ici votre commentaire" id="commentContent" name="commentContent"
         [(ngModel)]="commentFormData.commentContent" required></textarea>
     <div class="button-ctn">

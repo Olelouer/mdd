@@ -1,0 +1,21 @@
+@use '../mixins' as fn;
+
+#notFoundView {
+    max-height: 100vh;
+    padding-top: 100px;
+
+    h1 {
+        text-align: center;
+        margin-top: 0;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .img-ctn {
+        margin: 0 auto;
+        max-width: fn.clamp-calc(225px, 695px);
+    }
+}

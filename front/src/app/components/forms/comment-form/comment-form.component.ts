@@ -1,5 +1,6 @@
-import { Component, DestroyRef, input, Output, EventEmitter } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, DestroyRef, input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms';
 
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommentService } from '../../../services/comment.service';
@@ -8,11 +9,14 @@ import { GlobalMessageResponse } from '../../../interfaces/globalMessageResponse
 @Component({
   selector: 'cpn-comment-form',
   imports: [
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   templateUrl: './comment-form.component.html'
 })
 export class CommentFormComponent {
+  @ViewChild('commentForm') commentForm!: NgForm;
+
   articleId = input.required<string>();
   commentFormData = {
     commentContent: ''
@@ -37,8 +41,9 @@ export class CommentFormComponent {
       )
       .subscribe({
         next: (response: GlobalMessageResponse) => {
-          this.commentFormData.commentContent = '';
+          this.commentForm.resetForm();
           this.newCommentPosted.emit();
+          this.commentFormData.commentContent = '';
         },
         error: (error: Error) => console.error(error)
       })

@@ -100,6 +100,7 @@ img {
         position: absolute;
         left: 50px;
         top: 0;
+        z-index: 1;
     }
 }
 
@@ -126,7 +127,8 @@ img {
             margin-top: 0;
         }
 
-        #backArrow {
+        cpn-back-arrow {
+            display: block;
             position: initial;
             margin-right: auto;
             margin-bottom: 30px;

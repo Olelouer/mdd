@@ -4,15 +4,16 @@ import { RouterModule } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-homepage',
+  selector: 'app-not-found',
   imports: [MatButtonModule, RouterModule],
-  templateUrl: './homepage.component.html',
+  templateUrl: './not-found.component.html'
 })
-export class HomepageComponent {
+export class NotFoundComponent {
   constructor(private titleService: Title) {
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle("MDD")
+    this.titleService.setTitle("404 - MDD")
   }
+
 }

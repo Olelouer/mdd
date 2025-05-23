@@ -3,7 +3,8 @@
 
     <div class="container">
         <div class="page-head-ctn">
-            <button mat-button type="submit">Créer un article</button>
+            <button routerLink="/create-article" routerLinkActive="router-link-active" mat-button type="submit">Créer un
+                article</button>
             <a class="feed-sort animated-element -animated-opacity" [class.rotate-arrow]="currentSortOrder === 'desc'"
                 (click)="switchSort()">
                 Trier par

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { finalize, Observable } from 'rxjs';
 import { ArticleService } from '../../services/article.service';
 import { Article } from '../../interfaces/article/article.interface';
@@ -14,6 +15,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   selector: 'app-feed',
   imports: [
     CommonModule,
+    RouterModule,
     HeaderComponent,
     ArticleCardComponent,
     MatProgressSpinnerModule,
