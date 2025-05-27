@@ -1,25 +1,105 @@
-# P6-Full-Stack-reseau-dev
+# MDD
 
-## Front
+## 🏗️ Architecture
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+Ce projet est composé de deux applications principales :
 
-Don't forget to install your node_modules before starting (`npm install`).
+- **Frontend** : Application Angular 19 avec Angular Material
+- **Backend** : API REST Spring Boot 3.4 avec authentification JWT
+- **Base de données** : MySQL
+- **Tests API** : Collection Postman
 
-### Development server
+```
+📁 Projet MDD
+├── 🅰️ front/          # Application Angular (port 4200)
+├── ☕ back/           # API Spring Boot (port 8080)  
+└── 📮 postman/        # Collections Postman pour tester l'API
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🚀 Démarrage rapide
 
-### Build
+### Prérequis
+- **Node.js** 18+ et npm
+- **Java** 21+
+- **Maven** 3.6+
+- **MySQL** 8.0+
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Installation complète
 
-### Where to start
+1. **Cloner le projet**
+```bash
+git clone https://github.com/Olelouer/mdd.git
+cd mdd-project
+```
 
-As you may have seen if you already started the app, a simple home page containing a logo, a title and a button is available. If you take a look at its code (in the `home.component.html`) you will see that an external UI library is already configured in the project.
+2. **Configuration de la base de données**
+```sql
+CREATE DATABASE mdd_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
 
-This library is `@angular/material`, it's one of the most famous in the angular ecosystem. As you can see on their docs (https://material.angular.io/), it contains a lot of highly customizable components that will help you design your interfaces quickly.
+3. **Variables d'environnement** (créer un fichier `.env`)
+```bash
+DB_URL=jdbc:mysql://localhost:3306/mdd_db
+DB_USERNAME=your_db_username
+DB_PASSWORD=your_db_password
+JWT_SECRET=your_super_secret_jwt_key_here
+```
 
-Note: I recommend to use material however it's not mandatory, if you prefer you can get rid of it.
+4. **Démarrer le backend**
+```bash
+cd back
+mvn clean install
+mvn spring-boot:run
+```
+🌐 API disponible sur `http://localhost:8080`
 
-Good luck!
+5. **Démarrer le frontend**
+```bash
+cd front
+npm install
+npm start
+```
+🌐 Application disponible sur `http://localhost:4200`
+
+## 📮 Tests API avec Postman
+
+Une collection Postman complète est disponible dans le dossier `/postman` :
+
+Importer `postman/mdd.postman_collection.json` dans Postman
+
+## 🛠️ Technologies utilisées
+
+### Frontend
+- Angular 19.2
+- Angular Material
+
+### Backend
+- Spring Boot 3.4.1
+- Spring Security + JWT
+- Spring Data JPA
+- MySQL
+- Maven pour la gestion des dépendances
+
+## 📱 Fonctionnalités principales
+
+- 🔐 **Authentification** : Inscription/Connexion avec JWT
+- 📝 **Articles** : Création, lecture, mise à jour d'articles
+- 💬 **Commentaires** : Système de commentaires sur les articles
+- 👤 **Profils** : Gestion des profils utilisateurs
+- 🏷️ **Sujets** : Organisation par thématiques
+- 📱 **Responsive** : Interface adaptée mobile/desktop
+
+## 🚀 Déploiement
+
+### Environnement de développement
+- Frontend : `ng serve`
+- Backend : `mvn spring-boot:run`
+
+### Environnement de production
+- Frontend : `ng build --prod`
+- Backend : `mvn clean package` puis `java -jar target/mdd-api.jar`
+
+## 📖 Documentation détaillée
+
+- 📖 [Documentation Frontend](./front/README.md) - Angular, composants, services
+- 📖 [Documentation Backend](./back/README.md) - API, sécurité, base de données

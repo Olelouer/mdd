@@ -1,0 +1,257 @@
+{
+	"info": {
+		"_postman_id": "e038b30e-bc83-4710-865a-aec3f237c73b",
+		"name": "mdd",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "31566440"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test2@test.com\",\r\n    \"password\": \"Tartine952220!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test\",\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"Test!1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/auth/register"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/users/me"
+					},
+					"response": []
+				},
+				{
+					"name": "modify",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test2@test.com\",\r\n    \"username\": \"test2\",\r\n    \"password\": \"Tartine952220!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/users/me"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "themes",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/themes"
+					},
+					"response": []
+				},
+				{
+					"name": "get all with subscriptions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/themes/subscriptions"
+					},
+					"response": []
+				},
+				{
+					"name": "get subscribed",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/themes/subscribed"
+					},
+					"response": []
+				},
+				{
+					"name": "subscribe",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "localhost:8080/api/themes/3/subscribe"
+					},
+					"response": []
+				},
+				{
+					"name": "unsubscribe",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "localhost:8080/api/themes/1/unsubscribe"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "articles",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Test theme 3\",\r\n    \"content\": \"Test theme 3\",\r\n    \"userId\": 1,\r\n    \"themeId\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/articles"
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/articles"
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/articles/1"
+					},
+					"response": []
+				},
+				{
+					"name": "get user feed",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/articles/feed?sort=createdAt,asc",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"articles",
+								"feed"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "createdAt,asc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comments",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"Test\",\r\n    \"userId\": 1,\r\n    \"articleId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/comments"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MjIiLCJpYXQiOjE3NDgwMTIxMDIsImV4cCI6MTc0ODA5ODUwMn0.x6Y3ZIewH8JsxDCwTKb3r3aG-8HEo7x2v4T6fTupaAk"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
