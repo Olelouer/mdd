@@ -38,6 +38,9 @@ public class Article {
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ArticleLike> likes = new ArrayList<>();
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User author;
