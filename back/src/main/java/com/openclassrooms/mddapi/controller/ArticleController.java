@@ -36,6 +36,21 @@ public class ArticleController {
     }
 
     /**
+     * Likes an article
+     *
+     * @param currentUser Authenticated user
+     * @param id Article ID
+     * @return a GlobalMessageResponse indicating the result of the operation
+     */
+    @PostMapping("/{id}/like")
+    public ResponseEntity<GlobalMessageResponse> likeArticle(
+            @AuthenticationPrincipal User currentUser,
+            @PathVariable Long id
+    ) {
+        return ResponseEntity.ok(articleService.likeArticle(id, currentUser));
+    }
+
+    /**
      * Retrieves a list of all available articles.
      *
      * @return a ResponseEntity containing an ArticleListResponse object with the list of articles

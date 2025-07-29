@@ -38,6 +38,7 @@ public class ArticleMapper {
                 .theme(themeResponse)
                 .author(userResponse)
                 .comments(commentResponses)
+                .likeCount(article.getLikes().size())
                 .build();
     }
 

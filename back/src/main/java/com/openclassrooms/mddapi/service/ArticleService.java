@@ -6,8 +6,10 @@ import com.openclassrooms.mddapi.dto.ArticleResponse;
 import com.openclassrooms.mddapi.dto.GlobalMessageResponse;
 import com.openclassrooms.mddapi.mapper.ArticleMapper;
 import com.openclassrooms.mddapi.model.Article;
+import com.openclassrooms.mddapi.model.ArticleLike;
 import com.openclassrooms.mddapi.model.Theme;
 import com.openclassrooms.mddapi.model.User;
+import com.openclassrooms.mddapi.repository.ArticleLikeRepository;
 import com.openclassrooms.mddapi.repository.ArticleRepository;
 import com.openclassrooms.mddapi.repository.ThemeRepository;
 import com.openclassrooms.mddapi.repository.UserRepository;
@@ -32,6 +34,7 @@ public class ArticleService {
     private final ArticleMapper articleMapper;
     private final UserRepository userRepository;
     private final ThemeRepository themeRepository;
+    private final ArticleLikeRepository articleLikeRepository;
 
     /**
      * Creates a new article
@@ -54,6 +57,27 @@ public class ArticleService {
             articleRepository.save(article);
 
             return new GlobalMessageResponse("Article created successfully");
+        } catch (Exception ex) {
+            return new GlobalMessageResponse(ex.getMessage());
+        }
+    }
+
+    public GlobalMessageResponse likeArticle(Long id, User currentUser) {
+        try {
+            User user = userRepository.findById(currentUser.getId())
+                    .orElseThrow(() -> new EntityNotFoundException("User not found : " + currentUser.getId()));
+
+            Article article = articleRepository.findById(id)
+                    .orElseThrow(() -> new EntityNotFoundException("Article not found with id: " + id));
+
+            ArticleLike articleLike = ArticleLike.builder()
+                                            .user(user)
+                                            .article(article)
+                                            .build();
+
+            articleLikeRepository.save(articleLike);
+
+            return new GlobalMessageResponse("You liked the article !");
         } catch (Exception ex) {
             return new GlobalMessageResponse(ex.getMessage());
         }
