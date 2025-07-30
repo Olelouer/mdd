@@ -1,7 +1,6 @@
 package com.openclassrooms.mddapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.openclassrooms.mddapi.model.ArticleLike;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,4 +28,5 @@ public class ArticleResponse {
     private UserResponse author;
     private List<CommentResponse> comments;
     private int likeCount;
+    private boolean liked;
 }

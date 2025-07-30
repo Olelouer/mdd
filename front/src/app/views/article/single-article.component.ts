@@ -11,6 +11,7 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { BackArrowComponent } from '../../components/back-arrow/back-arrow.component';
 import { CommentCardComponent } from '../../components/cards/comment-card/comment-card.component';
 import { CommentFormComponent } from '../../components/forms/comment-form/comment-form.component';
+import { LikeButtonComponent } from '../../components/like-button/like-button.component';
 
 @Component({
   selector: 'app-single-article',
@@ -20,6 +21,7 @@ import { CommentFormComponent } from '../../components/forms/comment-form/commen
     HeaderComponent,
     BackArrowComponent,
     CommentCardComponent,
+    LikeButtonComponent,
     MatProgressSpinnerModule
   ],
   templateUrl: './single-article.component.html'

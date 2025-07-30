@@ -1,0 +1,7 @@
+<div id="likeButton">
+    <p>Avez-vous aimé cet article ?</p>
+    <span class="counter">{{ likeCount || 0 }}</span>
+    <a [class.liked]="liked" class="like-button" (click)="likeToggle()">
+        <i class="icon-love"></i>
+    </a>
+</div>

@@ -36,7 +36,7 @@ public class ArticleController {
     }
 
     /**
-     * Likes an article
+     * Like an article
      *
      * @param currentUser Authenticated user
      * @param id Article ID
@@ -56,8 +56,10 @@ public class ArticleController {
      * @return a ResponseEntity containing an ArticleListResponse object with the list of articles
      */
     @GetMapping
-    public ResponseEntity<ArticleListResponse> getAllArticles() {
-        return ResponseEntity.ok(articleService.getAllArticles());
+    public ResponseEntity<ArticleListResponse> getAllArticles(
+            @AuthenticationPrincipal User currentUser
+    ) {
+        return ResponseEntity.ok(articleService.getAllArticles(currentUser));
     }
 
     /**
@@ -84,7 +86,10 @@ public class ArticleController {
      * @return a ResponseEntity containing an ArticleResponse object with the article's details
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ArticleResponse> getArticle(@PathVariable Long id) {
-        return ResponseEntity.ok(articleService.getArticle(id));
+    public ResponseEntity<ArticleResponse> getArticle(
+            @PathVariable Long id,
+            @AuthenticationPrincipal User currentUser
+    ) {
+        return ResponseEntity.ok(articleService.getArticle(id, currentUser));
     }
 }

@@ -6,4 +6,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ArticleLikeRepository extends JpaRepository<ArticleLike, Long> {
+    /**
+     * Check if a user has liked the article
+     *
+     * @param articleId the article id
+     * @param userId the user id
+     *
+     * @return boolean
+     */
+    boolean existsByArticleIdAndUserId(Long articleId, Long userId);
 }

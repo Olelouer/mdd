@@ -2,6 +2,7 @@ package com.openclassrooms.mddapi.mapper;
 
 import com.openclassrooms.mddapi.dto.*;
 import com.openclassrooms.mddapi.model.Article;
+import com.openclassrooms.mddapi.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,7 @@ public class ArticleMapper {
     private final UserMapper userMapper;
     private final CommentMapper commentMapper;
 
-    public ArticleResponse toResponse(Article article) {
+    public ArticleResponse toResponse(Article article, User currentUser) {
         ThemeResponse themeResponse = null;
         UserResponse userResponse = null;
 
@@ -28,6 +29,11 @@ public class ArticleMapper {
         }
 
         List<CommentResponse> commentResponses = commentMapper.toResponseList(article.getComments());
+        boolean currentUserLiked = false;
+        if (currentUser != null && article.getLikes() != null) {
+            currentUserLiked = article.getLikes().stream()
+                    .anyMatch(likingUser -> likingUser.getUser().getId().equals(currentUser.getId()));
+        }
 
         return ArticleResponse.builder()
                 .id(article.getId())
@@ -39,12 +45,13 @@ public class ArticleMapper {
                 .author(userResponse)
                 .comments(commentResponses)
                 .likeCount(article.getLikes().size())
+                .liked(currentUserLiked)
                 .build();
     }
 
-    public List<ArticleResponse> toResponseList (List<Article> articles) {
+    public List<ArticleResponse> toResponseList (List<Article> articles, User currentUser) {
         return articles.stream()
-                .map(this::toResponse)
+                .map(article -> this.toResponse(article, currentUser))
                 .collect(Collectors.toList());
     }
 

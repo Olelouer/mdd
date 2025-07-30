@@ -28,6 +28,10 @@ export class ArticleService {
     return this.http.post<GlobalMessageResponse>(`${this.apiUrl}`, payload);
   }
 
+  likeArticle(articleId: string): Observable<GlobalMessageResponse> {
+    return this.http.post<GlobalMessageResponse>(`${this.apiUrl}/${articleId}/like`, null);
+  }
+
   getArticle(articleId: string): Observable<Article> {
     return this.http.get<Article>(`${this.apiUrl}/${articleId}`);
   }

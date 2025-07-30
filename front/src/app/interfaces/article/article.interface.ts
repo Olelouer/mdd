@@ -11,4 +11,6 @@ export interface Article {
     theme: Theme;
     author: UserInfos;
     comments: Comment[];
+    likeCount: number;
+    liked: boolean;
 }

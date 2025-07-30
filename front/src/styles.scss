@@ -3,6 +3,7 @@
 @use '@angular/material' as mat;
 @use './assets/scss/variables' as vars;
 @use './assets/scss/global';
+@use './assets/scss/icons';
 @use './assets/scss/forms';
 @use './assets/scss/buttons';
 @use './assets/scss/animations';
@@ -22,6 +23,7 @@
 @use './assets/scss/components/header';
 @use './assets/scss/components/back-arrow';
 @use './assets/scss/components/panel';
+@use './assets/scss/components/like-button';
 
 // Forms
 @use './assets/scss/components/forms/registration-form';

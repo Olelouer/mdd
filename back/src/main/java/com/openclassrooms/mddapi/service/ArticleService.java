@@ -16,6 +16,7 @@ import com.openclassrooms.mddapi.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Pageable;
@@ -62,13 +63,26 @@ public class ArticleService {
         }
     }
 
+    /**
+     * Current User likes an Article
+     *
+     * @param id the id of the article
+     * @param currentUser the currentUser
+     *
+     * @return a GlobalMessageResponse indicating the result of the operation
+     */
     public GlobalMessageResponse likeArticle(Long id, User currentUser) {
-        try {
             User user = userRepository.findById(currentUser.getId())
                     .orElseThrow(() -> new EntityNotFoundException("User not found : " + currentUser.getId()));
 
             Article article = articleRepository.findById(id)
                     .orElseThrow(() -> new EntityNotFoundException("Article not found with id: " + id));
+
+            boolean userLiked = articleLikeRepository.existsByArticleIdAndUserId(article.getId(), currentUser.getId());
+
+            if (userLiked) {
+                throw new DataIntegrityViolationException("User already liked this article");
+            }
 
             ArticleLike articleLike = ArticleLike.builder()
                                             .user(user)
@@ -78,9 +92,6 @@ public class ArticleService {
             articleLikeRepository.save(articleLike);
 
             return new GlobalMessageResponse("You liked the article !");
-        } catch (Exception ex) {
-            return new GlobalMessageResponse(ex.getMessage());
-        }
     }
 
     /**
@@ -88,8 +99,8 @@ public class ArticleService {
      *
      * @return an ArticleListResponse object with the list of articles
      */
-    public ArticleListResponse getAllArticles() {
-        return new ArticleListResponse(articleMapper.toResponseList(articleRepository.findAll()));
+    public ArticleListResponse getAllArticles(User currentUser) {
+        return new ArticleListResponse(articleMapper.toResponseList(articleRepository.findAll(), currentUser));
     }
 
 
@@ -121,7 +132,7 @@ public class ArticleService {
 
         if (!subscribedThemeIds.isEmpty()) {
             List<Article> articles = articleRepository.findByThemeIdIn(subscribedThemeIds, pageable);
-            feedArticleDTOs = articleMapper.toResponseList(articles);
+            feedArticleDTOs = articleMapper.toResponseList(articles, currentUser);
         }
 
         return new ArticleListResponse(feedArticleDTOs);
@@ -134,9 +145,9 @@ public class ArticleService {
      * @return an ArticleResponse object with the article's details
      * @throws IllegalArgumentException if the article is not found with the given ID
      */
-    public ArticleResponse getArticle(Long id) {
+    public ArticleResponse getArticle(Long id, User currentUser) {
         Article article = articleRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Article not found with id: " + id));
-        return articleMapper.toResponse(article);
+        return articleMapper.toResponse(article, currentUser);
     }
 }
