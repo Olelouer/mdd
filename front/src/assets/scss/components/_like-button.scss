@@ -26,5 +26,13 @@
                 color: red;
             }
         }
+
+        &.liked {
+            &:hover {
+                i {
+                    color: #888888;
+                }
+            }
+        }
     }
 }

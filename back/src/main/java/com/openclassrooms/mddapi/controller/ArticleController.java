@@ -40,6 +40,7 @@ public class ArticleController {
      *
      * @param currentUser Authenticated user
      * @param id Article ID
+     *
      * @return a GlobalMessageResponse indicating the result of the operation
      */
     @PostMapping("/{id}/like")
@@ -48,6 +49,22 @@ public class ArticleController {
             @PathVariable Long id
     ) {
         return ResponseEntity.ok(articleService.likeArticle(id, currentUser));
+    }
+
+    /**
+     * Unlike an article
+     *
+     * @param currentUser Authenticated user
+     * @param id Article ID
+     *
+     * @return a GlobalMessageResponse indicating the result of the operation
+     */
+    @DeleteMapping("/{id}/like")
+    public ResponseEntity<GlobalMessageResponse> unlikeArticle(
+            @AuthenticationPrincipal User currentUser,
+            @PathVariable Long id
+    ) {
+        return ResponseEntity.ok(articleService.unlikeArticle(id, currentUser));
     }
 
     /**
@@ -83,6 +100,7 @@ public class ArticleController {
      * Retrieves a specific article by its ID.
      *
      * @param id the ID of the article to retrieve
+     *
      * @return a ResponseEntity containing an ArticleResponse object with the article's details
      */
     @GetMapping("/{id}")

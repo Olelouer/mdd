@@ -44,10 +44,10 @@ public class ArticleService {
      *
      * @return a GlobalMessageResponse indicating the result of the operation
      */
+    @Transactional
     public GlobalMessageResponse createArticle(ArticleRequest articleRequest, User currentUser) {
         try {
-            User author = userRepository.findById(currentUser.getId())
-                    .orElseThrow(() -> new EntityNotFoundException("User not found : " + currentUser.getId()));
+            User author = findCurrentUser(currentUser);
 
             Theme theme = themeRepository.findById(articleRequest.getThemeId())
                     .orElseThrow(() -> new EntityNotFoundException("Article not found with id: " + articleRequest.getThemeId()));
@@ -66,26 +66,24 @@ public class ArticleService {
     /**
      * Current User likes an Article
      *
-     * @param id the id of the article
+     * @param articleId the id of the article
      * @param currentUser the currentUser
      *
      * @return a GlobalMessageResponse indicating the result of the operation
      */
-    public GlobalMessageResponse likeArticle(Long id, User currentUser) {
-            User user = userRepository.findById(currentUser.getId())
-                    .orElseThrow(() -> new EntityNotFoundException("User not found : " + currentUser.getId()));
+    @Transactional
+    public GlobalMessageResponse likeArticle(Long articleId, User currentUser) {
+            Article article = articleRepository.findById(articleId)
+                    .orElseThrow(() -> new EntityNotFoundException("Article not found with id: " + articleId));
 
-            Article article = articleRepository.findById(id)
-                    .orElseThrow(() -> new EntityNotFoundException("Article not found with id: " + id));
-
-            boolean userLiked = articleLikeRepository.existsByArticleIdAndUserId(article.getId(), currentUser.getId());
+            boolean userLiked = articleLikeRepository.existsByArticleIdAndUserId(articleId, currentUser.getId());
 
             if (userLiked) {
                 throw new DataIntegrityViolationException("User already liked this article");
             }
 
             ArticleLike articleLike = ArticleLike.builder()
-                                            .user(user)
+                                            .user(currentUser)
                                             .article(article)
                                             .build();
 
@@ -95,10 +93,32 @@ public class ArticleService {
     }
 
     /**
+     * Current User unlikes an Article
+     *
+     * @param articleId the article id
+     * @param currentUser the current user id
+     *
+     * @return a GlobalMessageResponse indicating the result of the operation
+     */
+    @Transactional
+    public GlobalMessageResponse unlikeArticle(Long articleId, User currentUser) {
+        boolean userLiked = articleLikeRepository.existsByArticleIdAndUserId(articleId, currentUser.getId());
+
+        if (!userLiked) {
+            throw new DataIntegrityViolationException("User didn't like this article");
+        }
+
+        articleLikeRepository.deleteByArticleIdAndUserId(articleId, currentUser.getId());
+
+        return new GlobalMessageResponse("You unliked th article !");
+    }
+
+    /**
      * Retrieves a list of all available articles.
      *
      * @return an ArticleListResponse object with the list of articles
      */
+    @Transactional(readOnly = true)
     public ArticleListResponse getAllArticles(User currentUser) {
         return new ArticleListResponse(articleMapper.toResponseList(articleRepository.findAll(), currentUser));
     }
@@ -145,9 +165,15 @@ public class ArticleService {
      * @return an ArticleResponse object with the article's details
      * @throws IllegalArgumentException if the article is not found with the given ID
      */
+    @Transactional(readOnly = true)
     public ArticleResponse getArticle(Long id, User currentUser) {
         Article article = articleRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Article not found with id: " + id));
         return articleMapper.toResponse(article, currentUser);
+    }
+
+    private User findCurrentUser(User currentUser) {
+        return userRepository.findById(currentUser.getId())
+                .orElseThrow(() -> new EntityNotFoundException("User not found : " + currentUser.getId()));
     }
 }

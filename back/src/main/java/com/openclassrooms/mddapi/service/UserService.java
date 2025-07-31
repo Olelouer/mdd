@@ -30,6 +30,7 @@ public class UserService {
      * @return The authenticated User object.
      * @throws BadCredentialsException if the authenticated user is not found in the repository.
      */
+    @Transactional(readOnly = true)
     public UserResponse getCurrentUser() {
         Optional<User> userOptional = findByUsername();
 
@@ -88,6 +89,7 @@ public class UserService {
      * @return an Optional containing the user if found, or an empty Optional if not found
      * @throws BadCredentialsException if there is no authenticated user
      */
+    @Transactional(readOnly = true)
     public Optional<User> findByUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !authentication.isAuthenticated()) {

@@ -15,4 +15,12 @@ public interface ArticleLikeRepository extends JpaRepository<ArticleLike, Long> 
      * @return boolean
      */
     boolean existsByArticleIdAndUserId(Long articleId, Long userId);
+
+    /**
+     * Delete the like related to an article and a user
+     *
+     * @param articleId the article id
+     * @param userId the user id
+     */
+    void deleteByArticleIdAndUserId(Long articleId, Long userId);
 }

@@ -1,6 +1,4 @@
-import { Component, DestroyRef, Input, inject } from '@angular/core';
-import { ArticleService } from '../../services/article.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'cpn-like-button',
@@ -11,14 +9,10 @@ export class LikeButtonComponent {
   @Input() likeCount?: number;
   @Input() itemId?: number;
   @Input() liked?: boolean;
-  private articleService = inject(ArticleService);
-  private destroyRef = inject(DestroyRef);
+
+  @Output() toggleLike = new EventEmitter<void>;
 
   likeToggle() {
-    this.articleService.likeArticle(String(this.itemId))
-      .pipe(
-        takeUntilDestroyed(this.destroyRef)
-      )
-      .subscribe();
+    this.toggleLike.emit();
   }
 }

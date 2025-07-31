@@ -50,7 +50,7 @@ export class SingleArticleComponent {
     }
   }
 
-  loadArticle(articleId: string) {
+  loadArticle(articleId: string): void {
     this.isLoading = true;
     this.articleService.getArticle(articleId)
       .pipe(
@@ -67,6 +67,25 @@ export class SingleArticleComponent {
           this.isLoading = false;
         }
       })
+  }
+
+  handleLikeToggle(): void {
+    if (!this.article) return;
+
+    this.article.liked = !this.article.liked;
+    this.article.liked ? this.article.likeCount++ : this.article.likeCount--;
+    const apiCall = this.article.liked ? this.articleService.likeArticle(String(this.articleId)) : this.articleService.unlikeArticle(String(this.articleId));
+
+    apiCall
+      .pipe(
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe({
+        error: () => {
+          this.article.liked = !this.article.liked;
+          this.article.liked ? this.article.likeCount++ : this.article.likeCount--;
+        },
+      });
   }
 
   handleNewCommentPosted(): void {

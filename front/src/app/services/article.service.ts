@@ -32,6 +32,10 @@ export class ArticleService {
     return this.http.post<GlobalMessageResponse>(`${this.apiUrl}/${articleId}/like`, null);
   }
 
+  unlikeArticle(articleId: string): Observable<GlobalMessageResponse> {
+    return this.http.delete<GlobalMessageResponse>(`${this.apiUrl}/${articleId}/like`);
+  }
+
   getArticle(articleId: string): Observable<Article> {
     return this.http.get<Article>(`${this.apiUrl}/${articleId}`);
   }

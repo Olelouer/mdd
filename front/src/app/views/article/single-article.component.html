@@ -17,8 +17,8 @@
                     <p>{{ article.content }}</p>
                 </div>
             </div>
-            <cpn-like-button [likeCount]="article.likeCount" [itemId]="article.id"
-                [liked]="article.liked"></cpn-like-button>
+            <cpn-like-button [likeCount]="article.likeCount" [itemId]="article.id" [liked]="article.liked"
+                (toggleLike)="handleLikeToggle()"></cpn-like-button>
             <hr class="separator" />
             <div class="comments">
                 <h2>Commentaires</h2>

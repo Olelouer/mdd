@@ -13,6 +13,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +30,7 @@ public class CommentService {
      * @param commentRequest the request containing the comment's details
      * @return GlobaleMessageResponse
      */
+    @Transactional
     public GlobalMessageResponse createComment(CommentRequest commentRequest, User currentUser) {
         try {
             User author = userRepository.findById(currentUser.getId())

@@ -26,6 +26,7 @@ public class ThemeService {
      *
      * @return an ThemeListResponse object with the list of themes
      */
+    @Transactional(readOnly = true)
     public ThemeListResponse getAllThemes() {
         return new ThemeListResponse(themeMapper.toResponseList(themeRepository.findAll()));
     }
