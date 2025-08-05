@@ -18,17 +18,16 @@ public class ArticleMapper {
     private final CommentMapper commentMapper;
 
     public ArticleResponse toResponse(Article article, User currentUser) {
-        ThemeResponse themeResponse = null;
         UserResponse userResponse = null;
 
-        if (article.getTheme() != null) {
-            themeResponse = themeMapper.toResponse(article.getTheme());
-        }
         if (article.getAuthor() != null) {
             userResponse = userMapper.toResponse(article.getAuthor());
         }
 
+        List<ThemeResponse> themeResponses = themeMapper.toResponseList(article.getAssociatedThemes());
+
         List<CommentResponse> commentResponses = commentMapper.toResponseList(article.getComments());
+
         boolean currentUserLiked = false;
         if (currentUser != null && article.getLikes() != null) {
             currentUserLiked = article.getLikes().stream()
@@ -41,7 +40,7 @@ public class ArticleMapper {
                 .content(article.getContent())
                 .createdAt(article.getCreatedAt())
                 .updatedAt(article.getUpdatedAt())
-                .theme(themeResponse)
+                .themes(themeResponses)
                 .author(userResponse)
                 .comments(commentResponses)
                 .likeCount(article.getLikes().size())

@@ -46,21 +46,21 @@ public class ArticleService {
      */
     @Transactional
     public GlobalMessageResponse createArticle(ArticleRequest articleRequest, User currentUser) {
-        try {
-            User author = findCurrentUser(currentUser);
+        User author = findCurrentUser(currentUser);
 
-            Theme theme = themeRepository.findById(articleRequest.getThemeId())
-                    .orElseThrow(() -> new EntityNotFoundException("Article not found with id: " + articleRequest.getThemeId()));
+        List<Theme> themes = themeRepository.findAllById(articleRequest.getThemesIds());
+        List<Long> requestedThemesIds = articleRequest.getThemesIds();
 
-            Article article = articleMapper.toEntity(articleRequest);
-            article.setAuthor(author);
-            article.setTheme(theme);
-            articleRepository.save(article);
-
-            return new GlobalMessageResponse("Article created successfully");
-        } catch (Exception ex) {
-            return new GlobalMessageResponse(ex.getMessage());
+        if (requestedThemesIds.size() != themes.size()) {
+            throw new EntityNotFoundException("One or more themes could not be found. Please provide valid themes Ids.");
         }
+
+        Article article = articleMapper.toEntity(articleRequest);
+        article.setAuthor(author);
+        article.setAssociatedThemes(themes);
+        articleRepository.save(article);
+
+        return new GlobalMessageResponse("Article created successfully");
     }
 
     /**
@@ -73,23 +73,23 @@ public class ArticleService {
      */
     @Transactional
     public GlobalMessageResponse likeArticle(Long articleId, User currentUser) {
-            Article article = articleRepository.findById(articleId)
-                    .orElseThrow(() -> new EntityNotFoundException("Article not found with id: " + articleId));
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new EntityNotFoundException("Article not found with id: " + articleId));
 
-            boolean userLiked = articleLikeRepository.existsByArticleIdAndUserId(articleId, currentUser.getId());
+        boolean userLiked = articleLikeRepository.existsByArticleIdAndUserId(articleId, currentUser.getId());
 
-            if (userLiked) {
-                throw new DataIntegrityViolationException("User already liked this article");
-            }
+        if (userLiked) {
+            throw new DataIntegrityViolationException("User already liked this article");
+        }
 
-            ArticleLike articleLike = ArticleLike.builder()
-                                            .user(currentUser)
-                                            .article(article)
-                                            .build();
+        ArticleLike articleLike = ArticleLike.builder()
+                                        .user(currentUser)
+                                        .article(article)
+                                        .build();
 
-            articleLikeRepository.save(articleLike);
+        articleLikeRepository.save(articleLike);
 
-            return new GlobalMessageResponse("You liked the article !");
+        return new GlobalMessageResponse("You liked the article !");
     }
 
     /**
@@ -151,7 +151,7 @@ public class ArticleService {
         }
 
         if (!subscribedThemeIds.isEmpty()) {
-            List<Article> articles = articleRepository.findByThemeIdIn(subscribedThemeIds, pageable);
+            List<Article> articles = articleRepository.findByAssociatedThemes_IdIn(subscribedThemeIds, pageable);
             feedArticleDTOs = articleMapper.toResponseList(articles, currentUser);
         }
 

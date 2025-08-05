@@ -1,14 +1,14 @@
 package com.openclassrooms.mddapi.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -23,6 +23,7 @@ public class ArticleRequest {
     @NotNull(message = "Content cannot be null")
     private String content;
 
-    @NotNull(message = "Theme ID is required")
-    private Long themeId;
+    @NotNull(message = "Themes IDs is required")
+    @NotEmpty(message = "At least one theme ID is required")
+    private List<Long> themesIds;
 }

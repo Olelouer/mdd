@@ -36,7 +36,7 @@ public class Theme {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
-    @OneToMany(mappedBy = "theme", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "associatedThemes", fetch = FetchType.LAZY)
     private List<Article> articles = new ArrayList<>();
 
     @ManyToMany(mappedBy = "subscribedThemes")

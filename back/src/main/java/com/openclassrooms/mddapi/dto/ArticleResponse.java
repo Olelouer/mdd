@@ -24,9 +24,9 @@ public class ArticleResponse {
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     private LocalDateTime updatedAt;
 
-    private ThemeResponse theme;
     private UserResponse author;
     private List<CommentResponse> comments;
+    private List<ThemeResponse> themes;
     private int likeCount;
     private boolean liked;
 }
